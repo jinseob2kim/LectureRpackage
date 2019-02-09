@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>From ShinyApps to R package</title>
+    <meta charset="utf-8">
+    <meta name="author" content="김진섭" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/footer-header.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# From ShinyApps to R package
+## Shinykorea 밋업
+### 김진섭
+### 2019-02-27 (updated: 2019-02-10)
+
+---
+
+
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;&lt;a href="https://www.anpanman.co.kr"&gt;ANPANMAN Co.,Ltd&lt;/a&gt;   
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://github.com/jinseob2kim"&gt;김진섭&lt;/a&gt;&lt;/span&gt;&lt;/div&gt; 
+
+
+---
+# Executive Summary 
+
+개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
+
+1. **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만들었다.
+
+2. 이것을 패키지로 만들어 **github**에 배포하였다. 
+
+3. **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)** 패키지로 코드 테스트를 수행하고 결과 리포트를 만들었다.
+
+4. **[pkgdown](https://github.com/r-lib/pkgdown)** 패키지로 홈페이지를 만들었다. 
+
+5. **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 3,4의 과정, 그리고 여러 운영체제에서의 패키지 테스트를 자동화하였다. 
+
+6. 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+
+
+
+---
+# Self-controlled methods 비교
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://media.springernature.com/lw785/springer-static/image/art%3A10.1186%2Fs12874-017-0457-7/MediaObjects/12874_2017_457_Fig1_HTML.gif" alt="a: SCCS, b: CCO, c: SSA" width="50%" /&gt;
+&lt;p class="caption"&gt;a: SCCS, b: CCO, c: SSA&lt;/p&gt;
+&lt;/div&gt;
+
+Figure from &lt;a name=cite-Takeuchi2018&gt;&lt;/a&gt;[Takeuchi, Shinozaki, and Matsuyama [1]](https://doi.org/10.1186/s12874-017-0457-7)
+
+---
+
+class: center, middle
+
+# END
+
+---
+
+# References
+
+&lt;a name=bib-Takeuchi2018&gt;&lt;/a&gt;[[1]](#cite-Takeuchi2018) Y.
+Takeuchi, T. Shinozaki and Y. Matsuyama. "A comparison of
+estimators from self-controlled case series, case-crossover
+design, and sequence symmetry analysis for pharmacoepidemiological
+studies". In: _BMC Medical Research Methodology_ 18.1 ( 1월.
+2018). DOI:
+[10.1186/s12874-017-0457-7](https://doi.org/10.1186/s12874-017-0457-7).
+URL:
+[https://doi.org/10.1186/s12874-017-0457-7](https://doi.org/10.1186/s12874-017-0457-7).
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="js/macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "<div class=\"progress-bar-container\">   </div>   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\"> ",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "4:3"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
