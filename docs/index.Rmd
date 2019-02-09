@@ -50,17 +50,13 @@ layout: true
 
 개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
 
-1. **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만들었다.
+1. **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
 
-2. 이것을 패키지로 만들어 **github**에 배포하였다. 
+2. **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**로 패키지를 소개하는 웹사이트를 만들었다. 
 
-3. **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)** 패키지로 코드 테스트를 수행하고 결과 리포트를 만들었다.
+3. **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
 
-4. **[pkgdown](https://github.com/r-lib/pkgdown)** 패키지로 홈페이지를 만들었다. 
-
-5. **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 3,4의 과정, 그리고 여러 운영체제에서의 패키지 테스트를 자동화하였다. 
-
-6. 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+4. 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
 
 
 
