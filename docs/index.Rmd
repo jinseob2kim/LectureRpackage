@@ -50,24 +50,200 @@ layout: true
 
 개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
 
+--
+
 1. **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
+
+--
 
 2. **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**로 패키지를 소개하는 웹사이트를 만들었다. 
 
+--
+
 3. **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
+
+--
 
 4. 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
 
 
 
 ---
-# Self-controlled methods 비교
+# ShinyApps
 
-```{r, fig.cap = "a: SCCS, b: CCO, c: SSA", out.width="50%"}
-include_graphics("https://media.springernature.com/lw785/springer-static/image/art%3A10.1186%2Fs12874-017-0457-7/MediaObjects/12874_2017_457_Fig1_HTML.gif")
+```{r, fig.cap = "Basic statistics", out.width="100%"}
+include_graphics("https://camo.githubusercontent.com/aa4156b420be17d5ee0c39271486d13db4886712/68747470733a2f2f636f6d6d756e6974792e7273747564696f2e636f6d2f75706c6f6164732f64656661756c742f6f7074696d697a65642f32582f652f653134333064663830376335313335656437613234666565396639626238633339303330373831315f315f363930783336302e676966")
 ```
 
 Figure from `r Citet(myBib, "Takeuchi2018")`
+
+---
+# Rstudio Addins
+
+```{r, fig.cap = "Rstudio Addins: jsmodule packages", out.width="100%"}
+include_graphics("https://camo.githubusercontent.com/96f270fef715ed29c4799a165e6de679def95c92/68747470733a2f2f626c6f672e616e70616e6d616e2e636f2e6b722f706f7374732f323031382d31312d32342d62617369632d62696f737461746973746963732f616464696e2e676966")
+```
+
+---
+
+# R packages
+
+.large[
+[jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules.
+]
+
+--
+.large[
+Dependencies
+
+- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블
+
+- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림
+
+]
+
+---
+
+class: center, middle
+
+# WHY
+
+---
+# 파일제한 5메가
+
+Shiny `fileInput`은 5메가 이하까지만 지원. 
+
+--
+
+사실, 용량 제한 바꿀 수 있음. `shiny.maxRequestSize` 옵션을 **app.R**에 추가.
+
+
+```{r, echo=T, eval = F}
+## change to 30mb
+*options(shiny.maxRequestSize = 30*1024^2)
+
+ui <- navbarPage("Basic statistics",
+                   tabPanel("Data",
+                            
+```
+
+--
+
+서버 부하가 부담. 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
+
+---
+# 인터넷 차단 환경
+
+건강보험 빅데이터 분석실은 인터넷 접속이 원천차단. 
+
+- **R**, **Rstudio**, **Rpackage** 파일을 직원에게 미리 보내야 함. 
+
+--
+
+데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
+
+
+---
+
+class: center, middle
+
+# Rstudio Addins 만들기
+
+---
+
+# 데이터를 입력변수로 받는 함수 만들기. 
+
+- ShinyApps의 `fileInput` 부분을 데이터를 **R**에서 읽는 것으로 바꿈. 
+
+--
+
+```{r, echo=T, eval=F}
+## app.R in ShinyApps
+server <- function(input, output, session) {
+
+  output$import <- renderUI({
+*   csvFileInput("datafile")
+    
+  })
+  
+* data.info <- callModule(csvFile, "datafile")
+  data <- reactive(data.info()$data)
+  data.label <- reactive(data.info()$label)
+  ...
+}
+
+* shinyApp(ui, server)
+```
+
+---
+
+```{r, echo =T, eval = F}
+## Addin function
+
+jsBasicGadget <- function(data, nfactor.limit = 20) {
+
+* out <- data.table(data, check.names = T)
+
+
+  ui <- navbarPage("Basic statistics",
+                   tabPanel("Data",
+                   ...)
+        )
+  
+  server <- function(input, output, session) {
+     ...
+    }
+  
+*  viewer <- browserViewer(browser = getOption("browser"))
+*  runGadget(ui, server, viewer = viewer)
+  
+```
+
+https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
+
+---
+# Addin 함수 만들기
+
+- 드래그된 데이터이름을 인식하여 Gadget을 실행함
+
+```{r, echo=T, eval=F}
+
+jsBasicAddin <- function(){
+  context <- rstudioapi::getActiveDocumentContext()
+  # Set the default data to use based on the selection.
+  dataString <- context$selection[[1]]$text
+* data <- get(dataString, envir = .GlobalEnv)
+* jsBasicGadget(data)
+}
+```
+
+---
+# **addins.dcf** 파일 만들기. 
+
+R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
+
+```sh
+Name: Basic statistics
+Description: Gadget including Data, Label info, Table 1, Regression(liear, logistic), Basic plot.
+Binding: jsBasicAddin
+Interactive: true
+```
+
+https://github.com/jinseob2kim/jsmodule/blob/master/inst/rstudio/addins.dcf
+
+
+---
+
+class: center, middle
+
+# R package 관리
+
+---
+
+class: center, middle
+
+# CRAN 배포
+
 
 ---
 
