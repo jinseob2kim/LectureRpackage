@@ -97,9 +97,9 @@ include_graphics("https://camo.githubusercontent.com/96f270fef715ed29c4799a165e6
 .large[
 Dependencies
 
-- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블(CRAN)
+- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
 
-- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림(CRAN)
+- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
 
 ]
 
@@ -342,9 +342,19 @@ class: center, middle
 [![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
 ```
 
+https://shields.io/ 에서 내 상태에 해당하는 뱃지를 얻을 수 있다.
 --
 
 - **오류는 없고**, **인기는 많은** 패키지임을 과시?
+
+---
+# 패키지 설명: 홈페이지 
+
+```{r,  out.width="80%"}
+include_graphics("pkgdown.png")
+```
+
+https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
 
 ---
 # 홈페이지, test coverage를 자동으로 만들자.
@@ -352,7 +362,7 @@ class: center, middle
 .large[
 - 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
 
-- test coverage: [covr](https://covr.r-lib.org/)
+- test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
 
 - 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
 ]
@@ -388,7 +398,7 @@ template:
 ---
 # 홈페이지 만들기 
 
-`build_site()` 실행하면 **/doc** 폴더에 홈페이지 만들어짐. 
+`build_site()` 실행하면 **/docs** 폴더에 홈페이지 만들어짐. 
 
 
 ```{r, fig.cap="Setting webpage in github", out.width="60%"}
@@ -400,15 +410,67 @@ include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-1
 
 
 ---
+# [testthat](http://testthat.r-lib.org/)
+
+함수의 테스트 코드를 작성하고 평가.
+
+- `usethis::use_testthat(), use_test()`로 기본 테스트 생성. `devtools::test()`로 테스트.
+
+```r
+context("Show regression table")
+
+test_that("Run glmshow.display", {
+  expect_is(glmshow.display(glm(mpg ~ cyl, data = mtcars)), "display")
+  expect_is(glmshow.display(glm(am ~ cyl, data = mtcars, family = "binomial")), "display")
+})
+
+test_that("Run cox2.display", {
+  library(survival);data(lung)
+  fit0 <- coxph(Surv(time, status) ~ ph.ecog + age, data = lung, model = TRUE)
+  fit1 <- coxph(Surv(time, status) ~ ph.ecog + age + cluster(inst), data = lung, model = TRUE)
+  fit2 <- coxph(Surv(time, status) ~ ph.ecog + age + frailty(inst), data = lung, model = TRUE)
+  
+  expect_is(cox2.display(fit0), "list")
+  expect_is(cox2.display(fit1), "list")
+  expect_is(cox2.display(fit2), "list")      
+})
+```
+
+
+---
 # [covr](https://covr.r-lib.org/)
 
-코드 실행 점검하고 리포트를 제공하는 [Codecov](https://codecov.io/)를 위한 R 패키지.
+코드 테스트 리포트를 제공하는 [Codecov](https://codecov.io/)나 [Coveralls](https://coveralls.io/)를 위한 R 패키지.
+
+- `covr::codecov(), coverall()` 로 실행.
+
+- [testthat](http://testthat.r-lib.org/) 결과 기반 리포트. https://codecov.io/gh/jinseob2kim/jstable/tree/master/R
 
 ```{r, out.width="75%"}
 include_graphics("codecov.png")
 ```
 
-https://codecov.io/gh/jinseob2kim/jstable/tree/master/R
+
+---
+# 귀찮다
+
+.large[
+업데이트 때마다 **홈페이지**와 **코드리포트** 만들기 싫다. 
+]
+
+--
+
+.large[
+사실, 패키지 **빌드(build) 체크**도 하기 싫다. 그러나 필요하다.
+
+- 내 컴퓨터에서 체크해봤자 리눅스환경만 확인한 것임. 
+
+- 맥이나 윈도우에서 실행이 보장안됨.
+
+]
+
+---
+# [travis-ci](https://travis-ci.org/): 빌드, 배포 자동화
 
 ---
 class: center, middle
