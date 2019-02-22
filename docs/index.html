@@ -306,7 +306,7 @@ https://github.com/jinseob2kim/jsmodule/blob/master/inst/rstudio/addins.dcf
 ---
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="img/addin.png" alt="Addin tab" width="80%" /&gt;
+&lt;img src="addin.png" alt="Addin tab" width="80%" /&gt;
 &lt;p class="caption"&gt;Addin tab&lt;/p&gt;
 &lt;/div&gt;
 
@@ -317,8 +317,89 @@ class: center, middle
 
 # R package 관리
 
----
 
+---
+# 패키지 상태 표현: Badge
+
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable) [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) [![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) [![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) [![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
+
+```md
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) 
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable)
+[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) [![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) 
+[![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) 
+[![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
+```
+
+--
+
+- **오류는 없고**, **인기는 많은** 패키지임을 과시?
+
+---
+# 홈페이지, test coverage를 자동으로 만들자.
+
+.large[
+- 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
+
+- test coverage: [covr](https://covr.r-lib.org/)
+
+- 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
+]
+
+
+---
+# [pkgdown](https://pkgdown.r-lib.org/)
+
+패키지 설치 후 `_pkgdown.yml` 파일에서 셋팅 
+
+```yaml
+URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
+
+development:
+  mode: auto
+  
+authors:
+  Jinseob Kim:
+    href: https://github.com/jinseob2kim
+  Anpanman:
+    href: https://www.anpanman.co.kr
+    html: &lt;img src="https://raw.githubusercontent.com/anpanmancorp/Anpanman/master/horizontal_anpanman_transparent.png" height="24" /&gt;
+
+
+template:
+  params:
+    docsearch:
+      api_key: f6ab1678f68371b7775614662cffcb9d
+      index_name: jstable
+
+```
+
+---
+# 홈페이지 만들기 
+
+`build_site()` 실행하면 **/doc** 폴더에 홈페이지 만들어짐. 
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://github.blog/wp-content/uploads/2016/08/d516076e-640c-11e6-8086-ce1d246a87d2.png?fit=1460%2C860" alt="Setting webpage in github" width="60%" /&gt;
+&lt;p class="caption"&gt;Setting webpage in github&lt;/p&gt;
+&lt;/div&gt;
+
+나중엔 [travis-ci](https://travis-ci.org/)를 이용, **gh-pages** 브랜치에 자동 배포.
+
+
+
+---
+# [covr](https://covr.r-lib.org/)
+
+코드 실행 점검하고 리포트를 제공하는 [Codecov](https://codecov.io/)를 위한 R 패키지.
+
+&lt;img src="codecov.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+https://codecov.io/gh/jinseob2kim/jstable/tree/master/R
+
+---
 class: center, middle
 
 # CRAN 배포
