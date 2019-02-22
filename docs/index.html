@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # From ShinyApps to R package
 ## Shinykorea 밋업
 ### 김진섭
-### 2019-02-27 (updated: 2019-02-17)
+### 2019-02-27 (updated: 2019-02-22)
 
 ---
 
@@ -84,9 +84,9 @@ Figure from &lt;a name=cite-Takeuchi2018&gt;&lt;/a&gt;[Takeuchi, Shinozaki, and 
 .large[
 Dependencies
 
-- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블
+- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블(CRAN)
 
-- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림
+- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림(CRAN)
 
 ]
 
@@ -128,6 +128,10 @@ ui &lt;- navbarPage("Basic statistics",
 
 --
 
+심평원 분석실은 CRAN은 다운가능, github은 불가능.
+
+--
+
 데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
 
 
@@ -135,13 +139,13 @@ ui &lt;- navbarPage("Basic statistics",
 
 class: center, middle
 
-# Rstudio Addins 만들기
+# [Rstudio Addins](https://rstudio.github.io/rstudioaddins) 만들기
 
 ---
 
 # 데이터를 입력변수로 받는 함수 만들기. 
 
-- ShinyApps의 `fileInput` 부분을 데이터를 **R**에서 읽는 것으로 바꿈. 
+- ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
 
 --
 
@@ -188,7 +192,78 @@ jsBasicGadget &lt;- function(data, nfactor.limit = 20) {
 *  runGadget(ui, server, viewer = viewer)
 ```
 
+--
+**Viewer options**
+
+- `paneViewer()`: Rstudio 우측 아래 **Viewer**
+
+- `dialogViewer()`: 따로 창을 실행
+
+- `browserViewer()`: 따로 브라우저 실행
+
+
+
 https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
+
+
+
+
+---
+# [miniUI](https://github.com/rstudio/miniUI)
+
+- Gadget용 간소화된 UI
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://github.com/rstudio/miniUI/raw/master/tools/tabs.gif" alt="minuUI" width="80%" /&gt;
+&lt;p class="caption"&gt;minuUI&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+
+```r
+ui &lt;- miniPage(
+  gadgetTitleBar("Shiny gadget example"),
+  miniTabstripPanel(
+    miniTabPanel("Parameters", icon = icon("sliders"),
+      miniContentPanel(
+        sliderInput("year", "Year", 1978, 2010, c(2000, 2010), sep = "")
+      )
+    ),
+    miniTabPanel("Visualize", icon = icon("area-chart"),
+      miniContentPanel(
+        plotOutput("cars", height = "100%")
+      )
+    ),
+    miniTabPanel("Map", icon = icon("map-o"),
+      miniContentPanel(padding = 0,
+        leafletOutput("map", height = "100%")
+      ),
+      miniButtonBlock(
+        actionButton("resetMap", "Reset")
+      )
+    ),
+    miniTabPanel("Data", icon = icon("table"),
+      miniContentPanel(
+        DT::dataTableOutput("table")
+      )
+    )
+  )
+)
+```
+
+
+---
+# 그러나 난..
+
+.large[
+미리 만든 ShinyApps와 동일한 환경을 원함.
+
+- [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps의 UI 코드 그대로 이용. 
+
+- `browserViewer()` 사용 : 웹브라우저에서 실행.
+
+]
 
 ---
 # Addin 함수 만들기
@@ -198,13 +273,21 @@ https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
 
 ```r
 jsBasicAddin &lt;- function(){
-  context &lt;- rstudioapi::getActiveDocumentContext()
+* context &lt;- rstudioapi::getActiveDocumentContext()
   # Set the default data to use based on the selection.
   dataString &lt;- context$selection[[1]]$text
 * data &lt;- get(dataString, envir = .GlobalEnv)
-* jsBasicGadget(data)
+  jsBasicGadget(data)
 }
 ```
+
+
+|   |   |
+|---|---|
+| `getActiveDocumentContext()`  |  Returns information about the currently active RStudio document. |
+| `insertText(location, text, id = NULL)` | Insert text at a specific location within a document.  |
+| `setDocumentContext(text, id = NULL)`   | 	Set the contents of a document open in RStudio.  |
+
 
 ---
 # **addins.dcf** 파일 만들기. 
@@ -219,6 +302,13 @@ Interactive: true
 ```
 
 https://github.com/jinseob2kim/jsmodule/blob/master/inst/rstudio/addins.dcf
+
+---
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/addin.png" alt="Addin tab" width="80%" /&gt;
+&lt;p class="caption"&gt;Addin tab&lt;/p&gt;
+&lt;/div&gt;
 
 
 ---
@@ -258,10 +348,10 @@ URL:
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="js/macros.js"></script>
 <script>var slideshow = remark.create({
-"slideNumberFormat": "<div class=\"progress-bar-container\">   </div>   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\"> ",
+"slideNumberFormat": "<div class=\"progress-bar-container\">   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">   </div> </div> ",
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false,
+"countIncrementalSlides": true,
 "ratio": "4:3"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
