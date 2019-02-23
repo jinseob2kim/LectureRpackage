@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # From ShinyApps to R package
 ## Shinykorea 밋업
 ### 김진섭
-### 2019-02-27 (updated: 2019-02-22)
+### 2019-02-27 (updated: 2019-02-23)
 
 ---
 
@@ -37,21 +37,24 @@ layout: true
 개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
 
 --
-
-1. **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
-
+.large[
+- **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
+]
 --
 
-2. **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**로 패키지를 소개하는 웹사이트를 만들었다. 
-
+.large[
+- **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
+]
 --
 
-3. **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
-
+.large[
+- **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
+]
 --
 
-4. 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
-
+.large[
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+]
 
 
 ---
@@ -321,7 +324,10 @@ class: center, middle
 ---
 # 패키지 상태 표현: Badge
 
-[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable) [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) [![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) [![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) [![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable) [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) 
+[![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) 
+[![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) 
+[![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
 
 ```md
 [![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) 
@@ -359,7 +365,7 @@ https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, htt
 ---
 # [pkgdown](https://pkgdown.r-lib.org/)
 
-패키지 설치 후 `_pkgdown.yml` 파일에서 셋팅 
+패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usetgis::use_pkgdonw()`으로 기본 설정 생성.
 
 ```yaml
 URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
@@ -448,7 +454,7 @@ test_that("Run cox2.display", {
 --
 
 .large[
-사실, 패키지 **빌드(build) 체크**도 하기 싫다. 그러나 필요하다.
+사실, 패키지 **빌드(build) 체크**도 하기 싫지만 필요하긴 하다. 게다가..
 
 - 내 컴퓨터에서 체크해봤자 리눅스환경만 확인한 것임. 
 
@@ -457,12 +463,332 @@ test_that("Run cox2.display", {
 ]
 
 ---
-# [travis-ci](https://travis-ci.org/): 빌드, 배포 자동화
+
+&lt;img src="https://nesoy.github.io/assets/posts/20170105/travis-ci.jpg" width="75%" style="display: block; margin: auto;" /&gt;
+
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable)
+
+.large[
+[travis-ci](https://travis-ci.org/): 가장 유명한 **CI**(Continuous Integration) tool, github와 연동. 
+
+- github commit 때마다 프로그램 **테스트, 빌드, 배포**가 자동 실행.
+
+- .travis.yml 에 설정 저장.
+]
+
+https://travis-ci.org/jinseob2kim/jsmodule/jobs/495263115
+
+
+---
+
+```yaml
+language: r
+cache:
+  packages: true        
+  directories:
+    - travis_phantomjs    ## for shinytest
+
+matrix:
+  allow_failures:
+  - r: devel
+
+  include:
+  - r: devel             
+  
+  - r: release
+    r_packages:
+    - covr
+    after_success:
+    - Rscript -e 'covr::codecov()'
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+    deploy:
+      provider: script
+     script: Rscript -e 'pkgdown::deploy_site_github()'
+      skip-cleanup: true
+  
+  - r: release
+   os: osx          ## for Mac OS
+  
+  - r: oldrel
+```
+
+
+
+
+
+---
+
+# [travis-ci](https://travis-ci.org/) with R package
+
+- `usethis::use_travis()` 로 **.travis.yml** 기본 설정파일 생성.
+
+```yaml
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+```
+
+---
+# Codecov
+
+`usethis::use_coverage("codecov")` 로 **.travis.yml** 에 `covr::codecov()` 실행 추가.
+
+
+```yaml
+language: R
+sudo: false
+cache: packages
+
+r_packages:
+- covr
+after_success:
+- Rscript -e 'covr::codecov()'
+```
+
+---
+# 홈페이지 빌드, 배포
+
+[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 **gh-pages 브랜치와 key**가 필요.
+
+&lt;img src="gh-pages.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+1. github에서 **gh-pages** 브랜치 만들기.
+
+2. **key** 생성: `travis::use_travis_deploy()` 를 **로컬 환경**에서 실행.
+
+&lt;img src="key-travis.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+--
+**.travis.yml** 에 추가
+
+```yaml
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip-cleanup: true
+```
+
+https://pkgdown.r-lib.org/reference/deploy_site_github.html
+
+
+
+---
+# [appveyor](https://travis-ci.org/)
+
+.large[
+[travis-ci](https://travis-ci.org/)는 리눅스와 맥만 지원 
+
+- **윈도우** 환경에서 테스트 못함. 
+]
+
+--
+
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
+
+.large[
+[appveyor](https://travis-ci.org/)는 리눅스와 **윈도우** 지원
+
+- `usethis::use_appveyor()` 로 기본 **appveyor.yml** 파일 생성.
+]
+
+---
+```yaml
+# DO NOT CHANGE the "init" and "install" sections below
+
+# Download script file from GitHub
+init:
+  ps: |
+        $ErrorActionPreference = "Stop"
+        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
+        Import-Module '..\appveyor-tool.ps1'
+
+install:
+  ps: Bootstrap
+
+cache:
+  - C:\RLibrary
+
+# Adapt as necessary starting from here
+
+build_script:
+  - travis-tool.sh install_deps
+
+test_script:
+  - travis-tool.sh run_tests
+
+on_failure:
+  - 7z a failure.zip *.Rcheck\*
+  - appveyor PushArtifact failure.zip
+
+artifacts:
+  - path: '*.Rcheck\**\*.log'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.out'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.fail'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.Rout'
+    name: Logs
+
+  - path: '\*_*.tar.gz'
+    name: Bits
+
+  - path: '\*_*.zip'
+    name: Bits
+```
+
 
 ---
 class: center, middle
 
 # CRAN 배포
+
+---
+# 평소에 잘 관리하자!
+
+.large[
+
+- 빌드 check: WARNING 뿐 아니라 **NOTE**도 없어야됨.
+
+- 오타, 대소문자: 특히 **DESCRIPTION** 파일
+
+- 최소 하나의 **vignette**
+
+- 함수 설명: 충실하진 않더라도 빠진건 없어야. 
+
+- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(**NOTE**).
+
+]
+
+http://r-pkgs.had.co.nz/release.html
+
+---
+# 오타, 대소문자 
+
+&gt; Thanks, please write package names, software names and API names in 
+single quotes (e.g. 'RStudio', 'shiny') in Title and Description.
+
+```yaml
+Package: jsmodule
+Title: RStudio addins and Shiny modules for medical research
+Description: RStudio addins and Shiny modules for descriptive statistics, regression and survival analysis.
+Version: 0.7.10
+Date: 2019-02-19
+```
+
+--
+
+```yaml
+Package: jsmodule
+Title: 'RStudio' Addins and 'Shiny' Modules for Medical Research
+Description: 'RStudio' addins and 'Shiny' modules for descriptive statistics, regression and survival analysis.
+Version: 0.7.10
+Date: 2019-02-19
+```
+
+---
+## Vignette
+
+.large[
+`usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
+
+- 귀찮으면 README 복붙하자. 
+
+- 홈페이지에도 추가됨.
+]
+
+
+---
+## 함수 설명, example
+
+&gt; Please omit example code that looks like this one:
+
+```r
+\dontrun{
+if(interactive()){
+  #EXAMPLE1
+  }
+}
+```
+
+--
+&gt; We see many Rd files with lines such as
+
+```r
+\details{
+DETAILS
+}
+\examples{
+  #EXAMPLE1
+}
+```
+&gt; These should alyways be deleted unless you have ral examples to insert.
+
+
+---
+# interactive() examples
+
+&gt;Thanks, unfortunately, your ceode is never tested at runtime, as you 
+only have interactive() examples,if at all, and your test cases do not 
+cover much code.
+&gt;Can you perhaps add examples and tests for the non-UI functionality?
+
+--
+
+.large[
+코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 **CRAN**에 신청한 상태.
+
+https://cransays.itsalocke.com/articles/dashboard.html
+]
+
+
+---
+# CRAN release 신청
+
+.large[
+`devtools::release()` 실행
+
+- 확인 질문들이 나옴: 문제 없다고 답하면 됨.
+
+- 확인 메일 보고 몇 가지 클릭하면 완료.
+
+- 진행과정 메일이 온다. 결정까지 10일 이내
+
+]
+
+---
+# Executive Summary 
+
+개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
+
+--
+.large[
+- **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
+]
+--
+
+.large[
+- **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
+]
+--
+
+.large[
+- **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
+]
+--
+
+.large[
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+]
 
 
 ---
