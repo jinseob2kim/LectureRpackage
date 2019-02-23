@@ -661,11 +661,14 @@ class: center, middle
 
 - 오타, 대소문자: 특히 **DESCRIPTION** 파일
 
+- **README, NEWS, cran-comments** 작성. 
+
 - 최소 하나의 **vignette**
 
 - 함수 설명: 충실하진 않더라도 빠진건 없어야. 
 
 - 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(**NOTE**).
+
 
 ]
 
@@ -696,7 +699,45 @@ Date: 2019-02-19
 ```
 
 ---
-## Vignette
+# 필수 markdown
+
+https://CRAN.R-project.org/package=jskm 
+
+- **README.md**: CRAN의 REAMDE가 됨.
+
+- **News.md**: CRAN의 NEWS가 됨.
+
+- **cran-comments.md**: 패키지 자체 테스트 결과를 적는다.
+
+---
+# cran-comments.md 예시
+
+```md
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+** Add examples and tests for the non-UI functionality.
+
+** Add examples to all Rd files.
+
+
+## Test environments
+** local Ubuntu 18.10 install, R 3.5.2
+** Ubuntu 14.04.5 LTS  (on travis-ci), R 3.5.1
+** win-builder (stable and oldrelease)
+
+## R CMD check results
+There were no ERRORs, WARNINGs or NOTEs.
+
+
+## Downstream dependencies
+There are currently no downstream dependencies for this package
+```
+
+
+---
+# Vignette
 
 .large[
 `usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
@@ -708,7 +749,7 @@ Date: 2019-02-19
 
 
 ---
-## 함수 설명, example
+# 함수 설명, example
 
 &gt; Please omit example code that looks like this one:
 
@@ -761,9 +802,29 @@ https://cransays.itsalocke.com/articles/dashboard.html
 
 - 확인 메일 보고 몇 가지 클릭하면 완료.
 
+- **CRAN-RELEASE** 파일 생성됨: release 때 필요한 정보.
+
 - 진행과정 메일이 온다. 결정까지 10일 이내
 
 ]
+
+---
+# CRAN-RELEASE
+
+```sh
+This package was submitted to CRAN on 2019-02-22.
+Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
+```
+
+--
+
+.large[
+CRAN 배포 확정되면 해당 commit 번호로 release
+]
+
+https://github.com/jinseob2kim/jstable/releases
+
+
 
 ---
 # Executive Summary 
