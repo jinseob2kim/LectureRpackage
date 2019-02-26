@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # From ShinyApps to R package
 ## Shinykorea 밋업
 ### 김진섭
-### 2019-02-27 (updated: 2019-02-23)
+### 2019-02-27 (updated: 2019-02-26)
 
 ---
 
@@ -365,7 +365,7 @@ https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, htt
 ---
 # [pkgdown](https://pkgdown.r-lib.org/)
 
-패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usetgis::use_pkgdonw()`으로 기본 설정 생성.
+패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdonw()`으로 기본 설정 생성.
 
 ```yaml
 URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
@@ -831,23 +831,13 @@ https://github.com/jinseob2kim/jstable/releases
 
 개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
 
---
 .large[
 - **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
-]
---
 
-.large[
 - **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
-]
---
 
-.large[
 - **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 2의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
-]
---
 
-.large[
 - 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
 ]
 
