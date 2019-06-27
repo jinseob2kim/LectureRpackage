@@ -1,0 +1,1049 @@
+---
+title: "From ShinyApps to R package"
+subtitle: "RUCK 2019 (작업중)"
+author: "김진섭"
+institute: "차라투(주)"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: ["css/footer-header.css", "default"]
+    lib_dir: libs
+    nature:
+      beforeInit: "js/macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      ratio: "4:3" 
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
+library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown);library(readr);library(purrr);library(tidyr)
+```
+
+
+layout: true
+
+<div class="my-footer"><span><a href="https://www.anpanman.co.kr">ANPANMAN Co.,Ltd</a>   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://github.com/jinseob2kim">김진섭</a></span></div> 
+
+
+---
+# Executive Summary 
+
+- 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
+
+
+--
+- 개인 PC에서 직접 이용할 수 있도록 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**을 포함한 패키지로 만들어 **github**에 배포하였다.
+
+
+--
+- **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
+
+
+--
+- **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 앞의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
+
+
+--
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+
+
+
+---
+
+class: center, middle
+
+# ShinyApps
+
+
+---
+# 맞춤형 ShinyApps
+
+* 안과 
+    + 시야 데이터 분석
+    
+    + 국민건강영양조사 백내장/안검하수 연구
+    
+
+* 내과 
+    + 심혈관질환 위험 요인 생존분석
+    
+    + 심혈관 생리학 지표 계산 
+    
+    + 대장암 위험 요인 생존분석
+    
+    + 타 연구결과 정리
+    
+    
+
+
+* 정신건강의학과
+    + 외상후 스트레스 장애 네트워크 분석
+
+
+---
+# 시야데이터: 일반적인 통계
+
+기술통계, 회귀/생존분석, 간단한 그림
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/VF.png)](http://app.zarathu.com)
+
+
+
+---
+# 국민건강영양조사
+
+표본조사데이터: [survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cataract.png)](http://app.zarathu.com)
+
+
+---
+# 심혈관질환 위험요인
+
+반복측정: [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png)](http://app.zarathu.com)
+
+
+---
+# 맞춤형 그림
+
+논문 맞춤형 [그림](https://ildiczeller.com/2018/02/11/downloadable-ggplots-in-shiny/)과 [테이블](https://rstudio.github.io/DT/extensions.html)을 다운로드
+
+
+.pull-left[
+[![Hazard ratio](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/geeplot1.png)](http://app.zarathu.com)
+
+]
+
+.pull-right[
+[![Time dependent ROC](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/geeplot2.png)](http://app.zarathu.com)
+]
+ 
+---
+# 테이블 다운로드 예
+
+[DT](https://rstudio.github.io/DT) 패키지의 `datatable` 함수
+
+```{r, eval = F, echo= T}
+datatable(
+*   iris, extensions = 'Buttons', options = list(
+*   dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
+*   buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    scrollX = T      # Scrolling X axis
+  )
+)
+```
+
+세부 `dom` 설정은 [여기](https://datatables.net/reference/option/dom) 
+
+---
+
+```{r}
+datatable(
+  iris, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    scrollX = T      # Scrolling X axis
+  )
+)
+```
+
+---
+# 그림 다운로드
+
+Shiny에서 모든 편집옵션 지원불가, 직접 편집 가능해야 함.
+
+* `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
+
+* `emf` 확장자: [devEMF](https://cran.r-project.org/package=devEMF) 패키지 이용, **PPT**에서 편집, `ggsave()` 지원 안함.
+
+윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능. 
+
+---
+# Example: `emf`
+
+**PPT** 정확한 그림인식 위해 **emfPlus = F** 옵션 필수!
+
+```{r, echo = T, eval = F}
+library(devEMF)
+emf("plot.emf", width = 7, height = 7, emfPlus = F)
+ggplot(mtcars, aes(mpg, cyl)) + geom_point()
+dev.off()
+```
+
+```{r, out.width= "70%"}
+include_graphics("https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/zzz.png")
+```
+
+
+---
+# 심혈관 생리지표 계산
+
+최대최소값 표시 & [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/phys.png)](http://app.zarathu.com)
+
+---
+# PTSD 네트워크 분석
+
+[qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/qgraph.png)](http://app.zarathu.com)
+
+
+---
+# 범용 ShinyApps
+
+데이터 형태에 따라 3개로 따로 만듦. 기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
+
+* [일반 데이터](http://app.zarathu.com/basic)
+
+
+* [반복측정 데이터](http://app.zarathu.com/repeated) - 한 사람이 여러번 측정함, [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) 기반의 분석 필요.
+
+
+* [서베이(survey) 데이터](http://app.zarathu.com/survey) - 샘플가중치 존재(ex: 국건영)
+
+
+* [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
+
+
+---
+
+class: center, middle
+
+# Problem
+
+---
+# 파일제한 5메가
+
+Shiny `fileInput`은 5메가 이하까지만 지원. 
+
+--
+
+사실, 용량 제한 바꿀 수 있음. `shiny.maxRequestSize` 옵션을 **app.R**에 추가.
+
+
+```{r, echo=T, eval = F}
+## change to 30mb
+*options(shiny.maxRequestSize = 30*1024^2)
+
+ui <- navbarPage("Basic statistics",
+                   tabPanel("Data",
+                            
+```
+
+--
+
+서버 부하가 부담. 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
+
+---
+# 인터넷 차단 환경
+
+건강보험 빅데이터 분석실은 인터넷 접속이 원천차단. 
+
+- **R**, **Rstudio**, **Rpackage** 파일을 직원에게 미리 보내야 함. 
+
+--
+
+심평원 분석실은 CRAN은 다운가능, github은 불가능.
+
+--
+
+데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
+
+
+
+
+
+---
+
+class: center, middle
+
+# [Rstudio Addins](https://rstudio.github.io/rstudioaddins) 만들기
+
+---
+# Rstudio Addins
+
+```{r, fig.cap = "Rstudio Addins: jsmodule packages", out.width="100%"}
+include_graphics("https://camo.githubusercontent.com/96f270fef715ed29c4799a165e6de679def95c92/68747470733a2f2f626c6f672e616e70616e6d616e2e636f2e6b722f706f7374732f323031382d31312d32342d62617369632d62696f737461746973746963732f616464696e2e676966")
+```
+
+---
+
+# R packages
+
+.large[
+[jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules([CRAN](https://cran.r-project.org/package=jsmodule))
+]
+
+--
+.large[
+Dependencies
+
+- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
+
+- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
+
+]
+
+---
+## 패키지 다운로드 수
+
+[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cran_down.png)](https://ipub.com/dev-corner/apps/r-package-downloads/)
+
+
+
+---
+
+# 데이터를 입력변수로 받는 함수 만들기. 
+
+- ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
+
+--
+
+```{r, echo=T, eval=F}
+## app.R in ShinyApps
+server <- function(input, output, session) {
+
+  output$import <- renderUI({
+*   csvFileInput("datafile")
+    
+  })
+  
+* data.info <- callModule(csvFile, "datafile")
+  data <- reactive(data.info()$data)
+  data.label <- reactive(data.info()$label)
+  ...
+}
+
+* shinyApp(ui, server)
+```
+
+---
+
+```{r, echo =T, eval = F}
+## Addin function
+
+jsBasicGadget <- function(data, nfactor.limit = 20) {
+
+* out <- data.table(data, check.names = T)
+
+
+  ui <- navbarPage("Basic statistics",
+                   tabPanel("Data",
+                   ...)
+        )
+  
+  server <- function(input, output, session) {
+     ...
+    }
+  
+*  viewer <- browserViewer(browser = getOption("browser"))
+*  runGadget(ui, server, viewer = viewer)
+  
+```
+
+--
+**Viewer options**
+
+- `paneViewer()`: Rstudio 우측 아래 **Viewer**
+
+- `dialogViewer()`: 따로 창을 실행
+
+- `browserViewer()`: 따로 브라우저 실행
+
+
+
+https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
+
+
+
+
+---
+# [miniUI](https://github.com/rstudio/miniUI)
+
+- Gadget용 간소화된 UI
+
+```{r, fig.cap = "minuUI", out.width="80%"}
+include_graphics("https://github.com/rstudio/miniUI/raw/master/tools/tabs.gif")
+```
+
+---
+
+```{r, echo = T, eval = F, out.width="50%"}
+ui <- miniPage(
+  gadgetTitleBar("Shiny gadget example"),
+  miniTabstripPanel(
+    miniTabPanel("Parameters", icon = icon("sliders"),
+      miniContentPanel(
+        sliderInput("year", "Year", 1978, 2010, c(2000, 2010), sep = "")
+      )
+    ),
+    miniTabPanel("Visualize", icon = icon("area-chart"),
+      miniContentPanel(
+        plotOutput("cars", height = "100%")
+      )
+    ),
+    miniTabPanel("Map", icon = icon("map-o"),
+      miniContentPanel(padding = 0,
+        leafletOutput("map", height = "100%")
+      ),
+      miniButtonBlock(
+        actionButton("resetMap", "Reset")
+      )
+    ),
+    miniTabPanel("Data", icon = icon("table"),
+      miniContentPanel(
+        DT::dataTableOutput("table")
+      )
+    )
+  )
+)
+
+```
+
+
+---
+# 그러나 난..
+
+.large[
+미리 만든 ShinyApps와 동일한 환경을 원함.
+
+- [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps의 UI 코드 그대로 이용. 
+
+- `browserViewer()` 사용 : 웹브라우저에서 실행.
+
+]
+
+---
+# Addin 함수 만들기
+
+- 드래그된 데이터이름을 인식하여 Gadget을 실행함
+
+```{r, echo=T, eval=F}
+
+jsBasicAddin <- function(){
+* context <- rstudioapi::getActiveDocumentContext()
+  # Set the default data to use based on the selection.
+  dataString <- context$selection[[1]]$text
+* data <- get(dataString, envir = .GlobalEnv)
+  jsBasicGadget(data)
+}
+```
+
+
+|   |   |
+|---|---|
+| `getActiveDocumentContext()`  |  Returns information about the currently active RStudio document. |
+| `insertText(location, text, id = NULL)` | Insert text at a specific location within a document.  |
+| `setDocumentContext(text, id = NULL)`   | 	Set the contents of a document open in RStudio.  |
+
+
+---
+# **addins.dcf** 파일 만들기. 
+
+R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
+
+```sh
+Name: Basic statistics
+Description: Gadget including Data, Label info, Table 1, Regression(liear, logistic), Basic plot.
+Binding: jsBasicAddin
+Interactive: true
+```
+
+https://github.com/jinseob2kim/jsmodule/blob/master/inst/rstudio/addins.dcf
+
+---
+
+```{r, fig.cap = "Addin tab", out.width="80%"}
+include_graphics("addin.png")
+```
+
+
+---
+# 개발 & 배포환경 
+
+개발, 맞춤형 앱
+
+* 대학원 서버에 [Docker 이미지](https://cloud.docker.com/u/jinseob2kim/repository/docker/jinseob2kim/docker-rshiny) 설치하여 기생.
+    + [R](https://www.r-project.org/), [RStudio server](https://www.rstudio.com/products/rstudio/download-server/), [shiny server](https://www.rstudio.com/products/shiny/download-server/)와 자주 쓰는 패키지를 미리 설치.
+    
+--
+
+범용 앱
+
+* AWS에 [Docker swarm](https://github.com/jinseob2kim/swarm-setting) 환경 구축.
+    + 부하정도에 따라 자동으로 인스턴스 추가/삭제. 현재 1대면 충분..
+    
+--
+
+코드: [깃허브](https://github.com/jinseob2kim)
+
+* R 패키지, Docker 이미지, 홈페이지/블로그는 public repository
+
+* 맞춤형 앱은 private repository
+
+
+[RUCK2018 발표자료](https://blog.zarathu.com/posts/2018-11-08-ruck2018/)
+
+
+---
+
+class: center, middle
+
+# R package 관리
+
+
+---
+# 패키지 상태 표현: Badge
+
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable) [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) 
+[![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) 
+[![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) 
+[![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
+
+```md
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) 
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable)
+[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) [![GitHub issues](https://img.shields.io/github/issues/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/issues) 
+[![GitHub stars](https://img.shields.io/github/stars/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/stargazers) 
+[![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
+```
+
+https://shields.io/ 에서 내 상태에 해당하는 뱃지를 얻을 수 있다.
+--
+
+- **오류는 없고**, **인기는 많은** 패키지임을 과시?
+
+---
+# 패키지 설명: 홈페이지 
+
+```{r,  out.width="80%"}
+include_graphics("pkgdown.png")
+```
+
+https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
+
+---
+# 홈페이지, test coverage를 자동으로 만들자.
+
+.large[
+- 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
+
+- test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+
+- 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
+]
+
+
+---
+# [pkgdown](https://pkgdown.r-lib.org/)
+
+패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdown()`으로 기본 설정 생성.
+
+```yaml
+URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
+
+development:
+  mode: auto
+  
+authors:
+  Jinseob Kim:
+    href: https://github.com/jinseob2kim
+  Anpanman:
+    href: https://www.anpanman.co.kr
+    html: <img src="https://raw.githubusercontent.com/anpanmancorp/Anpanman/master/horizontal_anpanman_transparent.png" height="24" />
+
+
+template:
+  params:
+    docsearch:
+      api_key: f6ab1678f68371b7775614662cffcb9d
+      index_name: jstable
+
+```
+
+---
+# 홈페이지 만들기 
+
+`build_site()` 실행하면 **/docs** 폴더에 홈페이지 만들어짐. 
+
+
+```{r, fig.cap="Setting webpage in github", out.width="60%"}
+include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-11e6-8086-ce1d246a87d2.png?fit=1460%2C860")
+```
+
+나중엔 [travis-ci](https://travis-ci.org/)를 이용, **gh-pages** 브랜치에 자동 배포.
+
+
+
+---
+# [testthat](http://testthat.r-lib.org/)
+
+함수의 테스트 코드를 작성하고 평가.
+
+- `usethis::use_testthat(), use_test()`로 기본 테스트 생성. `devtools::test()`로 테스트.
+
+```r
+context("Show regression table")
+
+test_that("Run glmshow.display", {
+  expect_is(glmshow.display(glm(mpg ~ cyl, data = mtcars)), "display")
+  expect_is(glmshow.display(glm(am ~ cyl, data = mtcars, family = "binomial")), "display")
+})
+
+test_that("Run cox2.display", {
+  library(survival);data(lung)
+  fit0 <- coxph(Surv(time, status) ~ ph.ecog + age, data = lung, model = TRUE)
+  fit1 <- coxph(Surv(time, status) ~ ph.ecog + age + cluster(inst), data = lung, model = TRUE)
+  fit2 <- coxph(Surv(time, status) ~ ph.ecog + age + frailty(inst), data = lung, model = TRUE)
+  
+  expect_is(cox2.display(fit0), "list")
+  expect_is(cox2.display(fit1), "list")
+  expect_is(cox2.display(fit2), "list")      
+})
+```
+
+
+---
+# [covr](https://covr.r-lib.org/)
+
+코드 테스트 리포트를 제공하는 [Codecov](https://codecov.io/)나 [Coveralls](https://coveralls.io/)를 위한 R 패키지.
+
+- `covr::codecov(), coverall()` 로 실행.
+
+- [testthat](http://testthat.r-lib.org/) 결과 기반 리포트. https://codecov.io/gh/jinseob2kim/jstable/tree/master/R
+
+```{r, out.width="75%"}
+include_graphics("codecov.png")
+```
+
+
+---
+# 귀찮다
+
+.large[
+업데이트 때마다 **홈페이지**와 **코드리포트** 만들기 싫다. 
+]
+
+--
+
+.large[
+사실, 패키지 **빌드(build) 체크**도 하기 싫지만 필요하긴 하다. 게다가..
+
+- 내 컴퓨터에서 체크해봤자 리눅스환경만 확인한 것임. 
+
+- 맥이나 윈도우에서 실행이 보장안됨.
+
+]
+
+---
+
+```{r, out.width="75%"}
+include_graphics("https://nesoy.github.io/assets/posts/20170105/travis-ci.jpg")
+```
+
+[![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable)
+
+.large[
+[travis-ci](https://travis-ci.org/): 가장 유명한 **CI**(Continuous Integration) tool, github와 연동. 
+
+- github commit 때마다 프로그램 **테스트, 빌드, 배포**가 자동 실행.
+
+- .travis.yml 에 설정 저장.
+]
+
+https://travis-ci.org/jinseob2kim/jsmodule/jobs/495263115
+
+
+---
+
+```yaml
+language: r
+cache:
+  packages: true        
+  directories:
+    - travis_phantomjs    ## for shinytest
+
+matrix:
+  allow_failures:
+  - r: devel
+
+  include:
+  - r: devel             
+  
+  - r: release
+    r_packages:
+    - covr
+    after_success:
+    - Rscript -e 'covr::codecov()'
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+    deploy:
+      provider: script
+     script: Rscript -e 'pkgdown::deploy_site_github()'
+      skip-cleanup: true
+  
+  - r: release
+   os: osx          ## for Mac OS
+  
+  - r: oldrel
+```
+
+
+
+
+
+---
+
+# [travis-ci](https://travis-ci.org/) with R package
+
+- `usethis::use_travis()` 로 **.travis.yml** 기본 설정파일 생성.
+
+```yaml
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+```
+
+---
+# Codecov
+
+`usethis::use_coverage("codecov")` 로 **.travis.yml** 에 `covr::codecov()` 실행 추가.
+
+
+```yaml
+language: R
+sudo: false
+cache: packages
+
+r_packages:
+- covr
+after_success:
+- Rscript -e 'covr::codecov()'
+```
+
+---
+# 홈페이지 빌드, 배포
+
+[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 **gh-pages 브랜치와 key**가 필요.
+
+```{r, out.width="75%"}
+include_graphics("gh-pages.png")
+```
+
+
+---
+
+1. github에서 **gh-pages** 브랜치 만들기.
+
+2. **key** 생성: `travis::use_travis_deploy()` 를 **로컬 환경**에서 실행.
+
+```{r, out.width="100%"}
+include_graphics("key-travis.png")
+```
+
+--
+**.travis.yml** 에 추가
+
+```yaml
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip-cleanup: true
+```
+
+https://pkgdown.r-lib.org/reference/deploy_site_github.html
+
+
+
+---
+# [appveyor](https://travis-ci.org/)
+
+.large[
+[travis-ci](https://travis-ci.org/)는 리눅스와 맥만 지원 
+
+- **윈도우** 환경에서 테스트 못함. 
+]
+
+--
+
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
+
+.large[
+[appveyor](https://travis-ci.org/)는 리눅스와 **윈도우** 지원
+
+- `usethis::use_appveyor()` 로 기본 **appveyor.yml** 파일 생성.
+]
+
+---
+```yaml
+# DO NOT CHANGE the "init" and "install" sections below
+
+# Download script file from GitHub
+init:
+  ps: |
+        $ErrorActionPreference = "Stop"
+        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
+        Import-Module '..\appveyor-tool.ps1'
+
+install:
+  ps: Bootstrap
+
+cache:
+  - C:\RLibrary
+
+# Adapt as necessary starting from here
+
+build_script:
+  - travis-tool.sh install_deps
+
+test_script:
+  - travis-tool.sh run_tests
+
+on_failure:
+  - 7z a failure.zip *.Rcheck\*
+  - appveyor PushArtifact failure.zip
+
+artifacts:
+  - path: '*.Rcheck\**\*.log'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.out'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.fail'
+    name: Logs
+
+  - path: '*.Rcheck\**\*.Rout'
+    name: Logs
+
+  - path: '\*_*.tar.gz'
+    name: Bits
+
+  - path: '\*_*.zip'
+    name: Bits
+```
+
+
+---
+class: center, middle
+
+# CRAN 배포
+
+---
+# 평소에 잘 관리하자!
+
+.large[
+
+- 빌드 check: WARNING 뿐 아니라 **NOTE**도 없어야됨.
+
+- 오타, 대소문자: 특히 **DESCRIPTION** 파일
+
+- **README, NEWS, cran-comments** 작성. 
+
+- 최소 하나의 **vignette**
+
+- 함수 설명: 충실하진 않더라도 빠진건 없어야. 
+
+- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(**NOTE**).
+
+
+]
+
+http://r-pkgs.had.co.nz/release.html
+
+---
+# 오타, 대소문자 
+
+> Thanks, please write package names, software names and API names in 
+single quotes (e.g. 'RStudio', 'shiny') in Title and Description.
+
+```yaml
+Package: jsmodule
+Title: RStudio addins and Shiny modules for medical research
+Description: RStudio addins and Shiny modules for descriptive statistics, regression and survival analysis.
+Version: 0.7.10
+Date: 2019-02-19
+```
+
+--
+
+```yaml
+Package: jsmodule
+Title: 'RStudio' Addins and 'Shiny' Modules for Medical Research
+Description: 'RStudio' addins and 'Shiny' modules for descriptive statistics, regression and survival analysis.
+Version: 0.7.10
+Date: 2019-02-19
+```
+
+---
+# 필수 markdown
+
+https://CRAN.R-project.org/package=jskm 
+
+- **README.md**: CRAN의 REAMDE가 됨.
+
+- **News.md**: CRAN의 NEWS가 됨.
+
+- **cran-comments.md**: 패키지 자체 테스트 결과를 적는다.
+
+---
+# cran-comments.md 예시
+
+```md
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+** Add examples and tests for the non-UI functionality.
+
+** Add examples to all Rd files.
+
+
+## Test environments
+** local Ubuntu 18.10 install, R 3.5.2
+** Ubuntu 14.04.5 LTS  (on travis-ci), R 3.5.1
+** win-builder (stable and oldrelease)
+
+## R CMD check results
+There were no ERRORs, WARNINGs or NOTEs.
+
+
+## Downstream dependencies
+There are currently no downstream dependencies for this package
+```
+
+
+---
+# Vignette
+
+.large[
+`usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
+
+- 귀찮으면 README 복붙하자. 
+
+- 홈페이지에도 추가됨.
+]
+
+
+---
+# 함수 설명, example
+
+> Please omit example code that looks like this one:
+
+```r
+\dontrun{
+if(interactive()){
+  #EXAMPLE1
+  }
+}
+```
+
+--
+> We see many Rd files with lines such as
+
+```r
+\details{
+DETAILS
+}
+\examples{
+  #EXAMPLE1
+}
+```
+> These should alyways be deleted unless you have ral examples to insert.
+
+
+---
+# interactive() examples
+
+>Thanks, unfortunately, your ceode is never tested at runtime, as you 
+only have interactive() examples,if at all, and your test cases do not 
+cover much code.
+>Can you perhaps add examples and tests for the non-UI functionality?
+
+--
+
+.large[
+코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 **CRAN**에 신청한 상태.
+
+https://cransays.itsalocke.com/articles/dashboard.html
+]
+
+
+---
+# CRAN release 신청
+
+.large[
+`devtools::release()` 실행
+
+- 확인 질문들이 나옴: 문제 없다고 답하면 됨.
+
+- 확인 메일 보고 몇 가지 클릭하면 완료.
+
+- **CRAN-RELEASE** 파일 생성됨: release 때 필요한 정보.
+
+- 진행과정 메일이 온다. 결정까지 10일 이내
+
+]
+
+---
+# CRAN-RELEASE
+
+```sh
+This package was submitted to CRAN on 2019-02-22.
+Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
+```
+
+--
+
+.large[
+CRAN 배포 확정되면 해당 commit 번호로 release
+]
+
+https://github.com/jinseob2kim/jstable/releases
+
+
+
+---
+# Executive Summary 
+
+- 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
+
+
+- 개인 PC에서 직접 이용할 수 있도록 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**을 포함한 패키지로 만들어 **github**에 배포하였다.
+
+
+- **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
+
+
+- **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 앞의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
+
+
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+
+
+---
+
+class: center, middle
+
+# END
+
+
+
