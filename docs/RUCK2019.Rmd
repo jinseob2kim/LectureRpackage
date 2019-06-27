@@ -1,5 +1,5 @@
 ---
-title: "From ShinyApps to R package"
+title: "From ShinyApps to CRAN"
 subtitle: "RUCK 2019 (작업중)"
 author: "김진섭"
 institute: "차라투(주)"
