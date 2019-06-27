@@ -28,13 +28,6 @@ library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown)
 ```
 
 
-layout: true
-
-<div class="my-footer"><span><a href="https://www.anpanman.co.kr">ANPANMAN Co.,Ltd</a>   
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<a href="https://github.com/jinseob2kim">김진섭</a></span></div> 
-
 
 ---
 # Executive Summary 
