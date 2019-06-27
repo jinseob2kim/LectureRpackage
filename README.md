@@ -8,4 +8,4 @@ Lecture about R package
 * [Shinykorea](https://github.com/shinykorea/Meetup) 2월 밋업: https://jinseob2kim.github.io/PresentationShinyMed/
 
 
-* [RUCK2019](http://ruck2019.r-kor.org/) 발표 자료: https://jinseob2kim.github.io/PresentationShinyMed/RUCK2019
+* [RUCK2019](http://ruck2019.r-kor.org/) 발표 준비: https://jinseob2kim.github.io/PresentationShinyMed/RUCK2019
