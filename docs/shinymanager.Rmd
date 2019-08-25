@@ -2,14 +2,14 @@
 title: "Login module for ShinyApps"
 subtitle: "shinymanager package"
 institute: Zarathu Co., Ltd
-author: "<br><br>Jinseob Kim; `r anicon::faa('github', animate='float', rtext='jinseob2kim')`"
+author: "<br><br>Jinseob Kim; [`r anicon::faa('github', animate='float', rtext='jinseob2kim')`](https://github.com/jinseob2kim)"
 date: "<br><br>2018-08-25, Updated: `r Sys.Date()`"
 output:
   xaringan::moon_reader:
      lib_dir: libs
      css: ["shinobi", "ninjutsu" , "assets/ninpo.css"]
      nature:
-      ratio: "4:3"
+      ratio: "16:9"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false 
@@ -34,17 +34,51 @@ library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown)
 
 
 ---
-class: bg-main1
+class: middle bg-main1
 
 # Executive Summary 
 
-개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
-### Teach you how to learn R
+<br>
 
---
-.large[
-- **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
-]
+### [shinymanager](https://github.com/datastorm-open/shinymanager) 로 .yellow[UI 종류에 상관없이], 간단하게 로그인기능을 추가한다.
+
+
+### [SQLite db](https://db.rstudio.com/databases/sqlite/) 를 이용, 접속자와 그 log를 관리한다.
+
+
+---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 없던 시절..
+
+
+---
+class: bg-main1
+
+# 직접 만들기 
+
+
+---
+class: bg-main1
+
+# [shinyauthr](https://github.com/PaulC91/shinyauthr)
+
+
+---
+class: bg-main1
+
+# [useR 2019 후기](https://ryo-n7.github.io/2019-07-21-user2019-reflections/)를 읽던 중
+
+```{r, out.width="70%"}
+knitr::include_graphics("fig-shinymanager/user2019_shinymanager.jpg")
+```
+
+
+
+---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
 
 
 ---
@@ -54,7 +88,7 @@ class: middle bg-main1
 
 ## Now part of latest development version of `xaringan`
 <br>
-### `devtools::install_github('yihui/xaringan')`
+### `install.packages("shinymanager")`
 <br>
 ### and add
 

@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 
 # Login module for ShinyApps
 ## shinymanager package
-### <br><br>Jinseob Kim; <span>&lt;i class="fab  fa-github faa-float animated "&gt;&lt;/i&gt;jinseob2kim</span>
+### <br><br>Jinseob Kim; <a href="https://github.com/jinseob2kim"><span>&lt;i class="fab  fa-github faa-float animated "&gt;&lt;/i&gt;jinseob2kim</span></a>
 ### Zarathu Co., Ltd
 ### <br><br>2018-08-25, Updated: 2019-08-25
 
@@ -38,17 +38,49 @@ pre {
 
 
 ---
-class: bg-main1
+class: middle bg-main1
 
 # Executive Summary 
 
-개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
-### Teach you how to learn R
+&lt;br&gt;
 
---
-.large[
-- **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
-]
+### [shinymanager](https://github.com/datastorm-open/shinymanager) 로 .yellow[UI 종류에 상관없이], 간단하게 로그인기능을 추가한다.
+
+
+### [SQLite db](https://db.rstudio.com/databases/sqlite/) 를 이용, 접속자와 그 log를 관리한다.
+
+
+---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 없던 시절..
+
+
+---
+class: bg-main1
+
+# 직접 만들기 
+
+
+---
+class: bg-main1
+
+# [shinyauthr](https://github.com/PaulC91/shinyauthr)
+
+
+---
+class: bg-main1
+
+# [useR 2019 후기](https://ryo-n7.github.io/2019-07-21-user2019-reflections/)를 읽던 중
+
+&lt;img src="fig-shinymanager/user2019_shinymanager.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
 
 
 ---
@@ -58,7 +90,7 @@ class: middle bg-main1
 
 ## Now part of latest development version of `xaringan`
 &lt;br&gt;
-### `devtools::install_github('yihui/xaringan')`
+### `install.packages("shinymanager")`
 &lt;br&gt;
 ### and add
 
@@ -118,7 +150,7 @@ class: split-two white
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"ratio": "4:3",
+"ratio": "16:9",
 "highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false
