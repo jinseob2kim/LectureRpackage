@@ -3,7 +3,7 @@ title: "Login module for ShinyApps"
 subtitle: "shinymanager package"
 institute: Zarathu Co., Ltd
 author: "<br><br>Jinseob Kim; [`r anicon::faa('github', animate='float', rtext='jinseob2kim')`](https://github.com/jinseob2kim)"
-date: "<br><br>2018-08-25, Updated: `r Sys.Date()`"
+date: "<br><br>2018-09-27, Updated: `r Sys.Date()`"
 output:
   xaringan::moon_reader:
      lib_dir: libs
@@ -14,21 +14,12 @@ output:
       highlightLines: true
       countIncrementalSlides: false 
 ---
-exclude: true
 
-<style type="text/css">
-code.r{
-  font-size: 16px;
-}
-pre {
-  font-size: 16px !important;
-}
-</style>
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
-library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown);library(readr);library(purrr);library(tidyr)
+library(knitr)
 ```
 
 
@@ -63,6 +54,7 @@ class: bg-main1
 
 ### 뭔가 아쉽다.
 
+http://app.zarathu.com/password-exam/
 
 
 ---
@@ -82,9 +74,14 @@ class: bg-main1
 
 # [shinyauthr](https://github.com/PaulC91/shinyauthr)
 
+```{r, out.width="80%"}
+include_graphics("https://user-images.githubusercontent.com/30856173/49153332-bb7a0900-f315-11e8-8a06-2375d299a766.png")
+```
+
+<br><br>
 ### 쉬움. https://cultureofinsight.shinyapps.io/shinyauthr/
 
-### navbar UI 에 적용이 어려움. http://app.zarathu.com/pspass/
+### navbar UI 에 적용이 어려움. http://app.zarathu.com/basicpass/
 
 
 ---
@@ -104,89 +101,194 @@ class: middle bg-main1
 # [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
 
 
+
+
 ---
+layout: true
+class: split-four white
 
-class: middle bg-main1
+.split-four[
+.row.bg-main1[.content[
+  `install.packages("shinymanager")`
+  
+  Demo: http://shinyapps.dreamrs.fr/shinymanager-demo/
 
+]]
 
-## `install.packages("shinymanager")`
-<br>
-
+.row.bg-main2[.content[
 ### Make User info
-
-```
+  ```
 credentials <- data.frame(
   user = c("shiny", "shinymanager"),
   password = c("azerty", "12345"),
-  admin = c(T, F),
-  stringsAsFactors = FALSE
-)
+  admin = c(T, F), stringsAsFactors = FALSE)
 ```
+]]
 
+.row.bg-main3[.content[
 ### Apply to UI
-
 ```
 ui <- secure_app(ui, enable_admin = T)
 ```
+]]
 
+
+.row.bg-main4[.content[
 ### In server
-
 ```
 res_auth <- secure_server(
     check_credentials = check_credentials(credentials)
   )
+
 ```
+]]
+]
+
+---
+class: fade-row2 fade-row3 fade-row4
+---
+class: fade-row1 fade-row3 fade-row4
+---
+class: fade-row1 fade-row2 fade-row4
+---
+class: fade-row1 fade-row2 fade-row3
+---
+class:
 
 
 ---
-class: middle bg-main1
+layout: false
+class: split-two white
 
-# How .yellow[should] you use R?
+.column.bg-main1[.content[
+# `dataframe` 은 .yellow[admin], .yellow[log] 기능 안됨.
+<br>
+
+```r
+ui <- secure_app(ui, enable_admin = T)
+```
+## Option doesn't run.
+
+]]
+.column.bg-main2[.content.vmiddle.center[
+# Need .yellow[DB]: for dynamic update.
+<br><br>
+# [shinymanager](https://github.com/datastorm-open/shinymanager) supports [RSQLite](https://db.rstudio.com/databases/sqlite/)
+<br>
+
+### Simple .yellow[DB] with 1 file
+
+
+]]
+
+
+
+
+---
+layout: true
+class: split-two white
+
+.row.bg-main1[.content[
+### Make User info: no .yellow[DB]
+```
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F), stringsAsFactors = FALSE)
+```
+### In server
+```
+res_auth <- secure_server(
+    check_credentials = check_credentials(credentials))
+
+```
+
+
+]]
+.row.bg-main2[.content[
+### Make User info: .yellow[DB]
+```
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F), stringsAsFactors = FALSE)
+
+*create_db(credentials_data = credentials, sqlite_path = "database.sqlite") 
+```
+### In server
+```
+res_auth <- secure_server(
+*   check_credentials = check_credentials("database.sqlite"))
+```
+
+]]
+
+---
+class: fade-row2
+---
+class: fade-row1
+---
+class:
+
+
+
+---
+layout: false
+class: bg-main1
+
+# .yellow[Caution] 
+
+<br><br><br><br>
+
+### [Shiny server](https://www.rstudio.com/products/shiny/shiny-server/) 통한 로그는 접근권한을 바꿔야.
+
+```shell
+chmod 777 -R <App directory>  ## write permission to all user
+```
+
+https://github.com/datastorm-open/shinymanager/issues/6
 
 
 ---
 class: bg-main1
 
-# Making your R work .yellow[organized] and .yellow[portable]
+# Secure .yellow[DB] with [keyring](https://github.com/r-lib/keyring) package
+
+
+```r
+library(keyring)
+key_set("R-shinymanager-key", "appname")
+```
+
+```{r, out.width="50%"}
+include_graphics("fig-shinymanager/keyring.jpg")
+```
 
 
 ---
+class:bg-main1
 
-class: bg-main1 split-30 hide-slide-number
+# When create .yellow[DB]
 
-.column.bg-main3[
+```r
+create_db(
+  credentials_data = credentials,
+  sqlite_path = "database.sqlite", 
+* passphrase = key_get("R-shinymanager-key", "appname")
+)
+```
+
+--
+# .yellow[Caution]
+
+.blockquote.font_large[
+Linux 에선 key 가 `environment variables` 로 저장됨.<br><br>
+Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 추가해야 함.
 ]
-.column.slide-in-right[
-.sliderbox.bg-main2.vmiddle[
-.font5[Split Cells]
-]]
-
-
 
 ---
+class: bg-main1 center
+#Thanks!
 
-class: split-two white
+<img src="https://raw.githubusercontent.com/will-r-chase/blog/master/static/slides/slide_img/thank_you.gif" width=80%>
 
-.column.bg-main1[.content[
-# A .yellow[kunoichi] can use .yellow[ninjutsu] to .green[split columns] easily.
-<br>
-## Define your classes as*
-```{}
-class: split-two white
-```
-
-## Columns are added easily by 
-```{r, eval=F}
-{{.column.bg-main1[.content[}}
-  content of first column
-]]
-{{.column.bg-main2[.content[}}
-  content of second column
-]]
-```
-]]
-.column.bg-main2[.content.vmiddle.center[
-# See the R-markdown source file for this slide [here](https://github.com/emitanaka/ninja-theme).
-<br><br>
-# * class white changes all the font to white
-]]
