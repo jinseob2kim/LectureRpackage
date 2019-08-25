@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>From ShinyApps to R package</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="김진섭" />
     <meta name="date" content="2019-02-27" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -854,12 +854,12 @@ class: center, middle
 # References
 
 &lt;a name=bib-Takeuchi2018&gt;&lt;/a&gt;[[1]](#cite-Takeuchi2018) Y.
-Takeuchi, T. Shinozaki and Y. Matsuyama. "A comparison of
+Takeuchi, T. Shinozaki, and Y. Matsuyama. "A comparison of
 estimators from self-controlled case series, case-crossover
 design, and sequence symmetry analysis for pharmacoepidemiological
 studies". In: _BMC Medical Research Methodology_ 18.1 (Jan. 2018).
 DOI:
-[10.1186/s12874-017-0457-7](https://doi.org/10.1186/s12874-017-0457-7).
+[10.1186/s12874-017-0457-7](https://doi.org/10.1186%2Fs12874-017-0457-7).
 URL:
 [https://doi.org/10.1186/s12874-017-0457-7](https://doi.org/10.1186/s12874-017-0457-7).
     </textarea>
@@ -925,8 +925,8 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
 </script>
 
 <script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -940,7 +940,8 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
