@@ -1,0 +1,119 @@
+---
+title: "Login module for ShinyApps"
+subtitle: "shinymanager package"
+institute: Zarathu Co., Ltd
+author: "<br><br>Jinseob Kim; `r anicon::faa('github', animate='float', rtext='jinseob2kim')`"
+date: "<br><br>2018-08-25, Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+     lib_dir: libs
+     css: ["shinobi", "ninjutsu" , "assets/ninpo.css"]
+     nature:
+      ratio: "4:3"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false 
+---
+exclude: true
+
+<style type="text/css">
+code.r{
+  font-size: 16px;
+}
+pre {
+  font-size: 16px !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
+library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown);library(readr);library(purrr);library(tidyr)
+```
+
+
+
+---
+class: bg-main1
+
+# Executive Summary 
+
+개인 PC에서 직접 **ShinyApps**를 이용할 수 있도록 
+### Teach you how to learn R
+
+--
+.large[
+- **ShinyApps**을 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**으로 만든 후, 이를 패키지로 만들어 **github**에 배포하였다.
+]
+
+
+---
+
+class: middle bg-main1
+
+
+## Now part of latest development version of `xaringan`
+<br>
+### `devtools::install_github('yihui/xaringan')`
+<br>
+### and add
+
+```
+output:
+  xaringan::moon_reader:
+    css: ["kunoichi", "ninjutsu"]
+```
+
+
+---
+class: middle bg-main1
+
+# How .yellow[should] you use R?
+
+
+---
+class: bg-main1
+
+# Making your R work .yellow[organized] and .yellow[portable]
+
+
+---
+
+class: bg-main1 split-30 hide-slide-number
+
+.column.bg-main3[
+]
+.column.slide-in-right[
+.sliderbox.bg-main2.vmiddle[
+.font5[Split Cells]
+]]
+
+
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# A .yellow[kunoichi] can use .yellow[ninjutsu] to .green[split columns] easily.
+<br>
+## Define your classes as*
+```{}
+class: split-two white
+```
+
+## Columns are added easily by 
+```{r, eval=F}
+{{.column.bg-main1[.content[}}
+  content of first column
+]]
+{{.column.bg-main2[.content[}}
+  content of second column
+]]
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+# See the R-markdown source file for this slide [here](https://github.com/emitanaka/ninja-theme).
+<br><br>
+# * class white changes all the font to white
+]]
