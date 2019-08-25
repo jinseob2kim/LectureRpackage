@@ -61,11 +61,32 @@ class: bg-main1
 
 # 직접 만들기 
 
+### `passwordInput` in shiny
+
+![](https://i.stack.imgur.com/BUqXR.png "https://stackoverflow.com/questions/41168459/r-shiny-user-authentication-for-single-app-r")
+
+### 뭔가 아쉽다.
+
+
+
+---
+class: bg-main1
+
+# [Google Auth0](https://auth0.com/blog/adding-authentication-to-shiny-server/) 
+
+&lt;img src="https://raw.githubusercontent.com/zarathucorp/dhh2018/master/img/auth0.gif" width="50%" style="display: block; margin: auto;" /&gt;
+
+### 복잡, App 별로 따로 안되는듯.
+
 
 ---
 class: bg-main1
 
 # [shinyauthr](https://github.com/PaulC91/shinyauthr)
+
+### 쉬움. https://cultureofinsight.shinyapps.io/shinyauthr/
+
+### navbar UI 에 적용이 어려움. http://app.zarathu.com/pspass/
 
 
 ---
@@ -88,16 +109,32 @@ class: middle bg-main1
 class: middle bg-main1
 
 
-## Now part of latest development version of `xaringan`
+## `install.packages("shinymanager")`
 &lt;br&gt;
-### `install.packages("shinymanager")`
-&lt;br&gt;
-### and add
+
+### Make User info
 
 ```
-output:
-  xaringan::moon_reader:
-    css: ["kunoichi", "ninjutsu"]
+credentials &lt;- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F),
+  stringsAsFactors = FALSE
+)
+```
+
+### Apply to UI
+
+```
+ui &lt;- secure_app(ui, enable_admin = T)
+```
+
+### In server
+
+```
+res_auth &lt;- secure_server(
+    check_credentials = check_credentials(credentials)
+  )
 ```
 
 
