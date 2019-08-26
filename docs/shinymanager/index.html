@@ -163,26 +163,24 @@ class: bg-main1
 ```r
 credentials &lt;- data.frame(
   user = c("shiny", "shinymanager"),
-  password = c("shiny", "shinymanager"),
-  stringsAsFactors = FALSE)
+  password = c("shiny", "shinymanager"), stringsAsFactors = FALSE)
 
 library(shiny);library(shinymanager)
 
 ui &lt;- fluidPage(
   tags$h2("My secure application"),
-  verbatimTextOutput("auth_output"))
+  verbatimTextOutput("auth_output")) 
 
 ui &lt;- secure_app(ui)
 
 server &lt;- function(input, output, session) {
-  res_auth &lt;- secure_server(
-    check_credentials = check_credentials(credentials))
+  res_auth &lt;- secure_server(check_credentials = check_credentials(credentials))
   
   output$auth_output &lt;- renderPrint({
     reactiveValuesToList(res_auth)
   })
-
 }
+
 shinyApp(ui, server)
 ```
 
