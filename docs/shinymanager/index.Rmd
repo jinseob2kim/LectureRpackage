@@ -111,7 +111,7 @@ class: split-four white
 .row.bg-main1[.content[
   `install.packages("shinymanager")`
   
-  Demo: http://shinyapps.dreamrs.fr/shinymanager-demo/
+  Demo: http://shinyapps.dreamrs.fr/shinymanager-demo/ (id & password: .yellow[shinymanager])
 
 ]]
 
@@ -232,6 +232,8 @@ class:
 
 
 
+
+
 ---
 layout: false
 class: bg-main1
@@ -247,6 +249,14 @@ chmod 777 -R <App directory>  ## write permission to all user
 ```
 
 https://github.com/datastorm-open/shinymanager/issues/6
+
+
+---
+class:bg-main1
+
+```{r}
+include_graphics("https://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/shinymanager.PNG")
+```
 
 
 ---
