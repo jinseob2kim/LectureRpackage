@@ -157,7 +157,46 @@ class:
 
 
 ---
+layout:false
+class: bg-main1
+
+# `app.R` Example
+
+```r
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("shiny", "shinymanager"),
+  stringsAsFactors = FALSE)
+
+library(shiny);library(shinymanager)
+
+ui <- fluidPage(
+  tags$h2("My secure application"),
+  verbatimTextOutput("auth_output"))
+
+ui <- secure_app(ui)
+
+server <- function(input, output, session) {
+  res_auth <- secure_server(
+    check_credentials = check_credentials(credentials))
+  
+  output$auth_output <- renderPrint({
+    reactiveValuesToList(res_auth)
+  })
+
+}
+shinyApp(ui, server)
+```
+
+---
 layout: false
+class:bg-main1
+
+```{r}
+include_graphics("https://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/shinymanager.PNG")
+```
+
+---
 class: split-two white
 
 .column.bg-main1[.content[
@@ -250,13 +289,6 @@ chmod 777 -R <App directory>  ## write permission to all user
 
 https://github.com/datastorm-open/shinymanager/issues/6
 
-
----
-class:bg-main1
-
-```{r}
-include_graphics("https://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/shinymanager.PNG")
-```
 
 
 ---
