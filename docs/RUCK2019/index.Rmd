@@ -50,13 +50,13 @@ class:  bg-main1
 
 class: middle bg-main1
 
-# ShinyApps
+# 맞춤형 ShinyApps
 
 
 ---
 class:  bg-main1
 
-# 맞춤형 ShinyApps
+# 연구지원 분류
 
 * 통계 분석
     + 일반 데이터: Table 1, 회귀분석, 생존분석
@@ -100,7 +100,7 @@ class:  bg-main1
 ---
 class:  bg-main1
 
-# Tip: 그림 편집
+# Tip 1: 그림 편집
 
 .large[
 Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
@@ -134,7 +134,7 @@ include_graphics("https://raw.githubusercontent.com/jinseob2kim/PresentationShin
 ---
 class:  bg-main1
 
-# Tip: 테이블 다운로드 
+# Tip 2: 테이블 다운로드 
 
 [DT](https://rstudio.github.io/DT) 패키지의 `datatable` 함수
 
@@ -165,7 +165,7 @@ datatable(
 
 ---
 class:  bg-main1
-# Tip: `dropdownButton`
+# Tip 3: `dropdownButton`
 
 ### [shinyWidgets](https://github.com/dreamRs/shinyWidgets) Package
 
@@ -184,43 +184,405 @@ shinyWidgets::dropdownButton(
   tooltip = tooltipOptions(title = "Click to see inputs !"))
 ```
 
+---
+class: middle bg-main1
+
+# Tip 4: Login module for ShinyApps
 
 
 ---
-# 국민건강영양조사
+class: middle bg-main1
 
-표본조사데이터: [survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
+# Executive Summary 
 
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cataract.png)](http://app.zarathu.com)
+<br>
 
-
----
-# 심혈관질환 위험요인
-
-반복측정: [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
-
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png)](http://app.zarathu.com)
+### [shinymanager](https://github.com/datastorm-open/shinymanager) 로 .yellow[UI 종류에 상관없이], 간단하게 로그인기능을 추가한다.
 
 
+### [SQLite db](https://db.rstudio.com/databases/sqlite/) 를 이용, 접속자와 그 log를 관리한다.
 
 
 ---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 없던 시절..
+
+
+---
+class: bg-main1
+
+# 직접 만들기 
+
+### `passwordInput` in shiny
+
+
+<a href="https://stackoverflow.com/questions/41168459/r-shiny-user-authentication-for-single-app-r"><img src="https://i.stack.imgur.com/BUqXR.png " width=100%></a>
+
+
+### 뭔가 아쉽다.
+
+http://app.zarathu.com/password-exam/
+
+
+---
+class: bg-main1
+
+# [Google Auth0](https://auth0.com/blog/adding-authentication-to-shiny-server/) 
+
+```{r, out.width="80%"}
+include_graphics("https://raw.githubusercontent.com/zarathucorp/dhh2018/master/img/auth0.gif")
+```
+
+### 복잡, App 별로 따로 안되는듯.
+
+
+---
+class: bg-main1
+
+# [shinyauthr](https://github.com/PaulC91/shinyauthr)
+
+```{r, out.width="100%"}
+include_graphics("https://user-images.githubusercontent.com/30856173/49153332-bb7a0900-f315-11e8-8a06-2375d299a766.png")
+```
+
+<br><br>
+### 쉬움. https://cultureofinsight.shinyapps.io/shinyauthr/
+
+### navbar UI 에 적용이 어려움. http://app.zarathu.com/basicpass/
+
+
+---
+class: bg-main1
+
+# [useR 2019 후기](https://ryo-n7.github.io/2019-07-21-user2019-reflections/)를 읽던 중
+
+```{r, out.width="100%"}
+knitr::include_graphics("https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/user2019_shinymanager.jpg")
+```
+
+
+
+---
+class: middle bg-main1
+
+# [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
+
+
+
+
+---
+layout: true
+class: split-four white
+
+.split-four[
+.row.bg-main1[.content[
+  `install.packages("shinymanager")`
+  
+  Demo: http://shinyapps.dreamrs.fr/shinymanager-demo/ (id & password: .yellow[shinymanager])
+
+]]
+
+.row.bg-main2[.content[
+### Make User info
+  ```
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F), stringsAsFactors = FALSE)
+```
+]]
+
+.row.bg-main3[.content[
+### Apply to UI
+```
+ui <- secure_app(ui, enable_admin = T)
+```
+]]
+
+
+.row.bg-main4[.content[
+### In server
+```
+res_auth <- secure_server(
+    check_credentials = check_credentials(credentials)
+  )
+
+```
+]]
+]
+
+---
+class: fade-row2 fade-row3 fade-row4
+---
+class: fade-row1 fade-row3 fade-row4
+---
+class: fade-row1 fade-row2 fade-row4
+---
+class: fade-row1 fade-row2 fade-row3
+---
+class:
+
+
+---
+layout:false
+class: bg-main1
+
+# `app.R` Example
+
+```r
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("shiny", "shinymanager"), stringsAsFactors = FALSE)
+
+library(shiny);library(shinymanager)
+
+ui <- fluidPage(
+  tags$h2("My secure application"),
+  verbatimTextOutput("auth_output")) 
+
+ui <- secure_app(ui)
+
+server <- function(input, output, session) {
+  res_auth <- secure_server(check_credentials = check_credentials(credentials))
+  
+  output$auth_output <- renderPrint({
+    reactiveValuesToList(res_auth)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+---
+layout: false
+class:bg-main1
+
+```{r}
+include_graphics("https://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/shinymanager.PNG")
+```
+
+---
+class: split-two white
+
+.row.bg-main1[.content[
+# `dataframe` 은 .yellow[admin], .yellow[log] 기능 안됨.
+<br>
+
+```r
+ui <- secure_app(ui, enable_admin = T)
+```
+## Option doesn't run.
+
+]]
+.row.bg-main2[.content.vmiddle.center[
+# Need .yellow[DB]: for dynamic update.
+<br><br>
+# [shinymanager](https://github.com/datastorm-open/shinymanager) supports [RSQLite](https://db.rstudio.com/databases/sqlite/)
+<br>
+
+### Simple .yellow[DB] with 1 file
+
+
+]]
+
+
+
+
+---
+layout: true
+class: split-two white
+
+.row.bg-main1[.content[
+### Make User info: no .yellow[DB]
+```
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F), stringsAsFactors = FALSE)
+```
+### In server
+```
+res_auth <- secure_server(
+    check_credentials = check_credentials(credentials))
+
+```
+
+
+]]
+.row.bg-main2[.content[
+### Make User info: .yellow[DB]
+```
+credentials <- data.frame(
+  user = c("shiny", "shinymanager"),
+  password = c("azerty", "12345"),
+  admin = c(T, F), stringsAsFactors = FALSE)
+
+*create_db(credentials_data = credentials, sqlite_path = "database.sqlite") 
+```
+### In server
+```
+res_auth <- secure_server(
+*   check_credentials = check_credentials("database.sqlite"))
+```
+
+]]
+
+---
+class: fade-row2
+---
+class: fade-row1
+---
+class:
+
+
+
+
+
+---
+layout: false
+class: bg-main1
+
+# .yellow[Caution] 
+
+<br><br><br><br>
+
+### [Shiny server](https://www.rstudio.com/products/shiny/shiny-server/) 통한 로그는 접근권한을 바꿔야.
+
+```shell
+chmod 777 -R <App directory>  ## write permission to all user
+```
+
+https://github.com/datastorm-open/shinymanager/issues/6
+
+
+
+---
+class: bg-main1
+
+# Secure .yellow[DB] with [keyring](https://github.com/r-lib/keyring) package
+
+
+```r
+library(keyring)
+key_set("R-shinymanager-key", "appname")
+```
+
+```{r, out.width="80%"}
+include_graphics("https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/keyring.jpg")
+```
+
+
+---
+class:bg-main1
+
+# When create .yellow[DB]
+
+```r
+create_db(
+  credentials_data = credentials,
+  sqlite_path = "database.sqlite", 
+* passphrase = key_get("R-shinymanager-key", "appname")
+)
+```
+
+--
+# .yellow[Caution]
+
+.blockquote.font_large[
+Linux 에선 key 가 `environment variables` 로 저장됨.<br><br>
+Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 추가해야 함.
+]
+
+
+
+
+---
+class: bg-main1
+# 반복측정: 심혈관질환 위험요인
+
+ [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
+
+<a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png" width=100%></a>
+
+
+
+
+---
+class: bg-main1
+# 표본조사: 국민건강영양조사
+
+[survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
+
+<a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cataract.png" width=100%></a>
+
+
+---
+class: bg-main1
+
+# Propensity score: 심혈관시술 효과
+
+[MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching & IPTW]
+
+<center><a href="http://147.47.68.165:1111/COBIS_gacheon/"><img src="ps.jpg" width=80%></a></center>
+
+
+---
+class: bg-main1
+# 공통데이터모델(CDM) 결과 확인.
+
+[zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
+
+<center><a href="http://147.47.68.165:1111/cdm/estimation"><img src="cdm.jpg" width=80%></a></center>
+
+---
+class: bg-main1
+
+# Tip 5: Don't use `utils::zip` 
+
+기본함수인 `utils::zip` 은 .yellow[shiny] 와 궁합이 안좋음. `directory` 인식 문제
+
+```r
+userFile <- eventReactive(input$file, {
+    input$file
+  })
+  
+data <- eventReactive(input$file, {
+*   tmp <- tempfile()
+*   zip::unzip(userFile()$datapath, exdir = tmp)
+*   ref <- readRDS(paste0(tmp, "/result/outcomeModelReference.rds"))
+    return(list(dir = tmp, ref = ref))
+  })
+
+```
+
+---
+class: bg-main1
 # 심혈관 생리지표 계산
 
-최대최소값 표시 & [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
+최대최소값 표시 & [brush](https://shiny.rstudio.com/articles/plot-interaction.html) 이용 [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
 
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/phys.png)](http://app.zarathu.com)
+<center><a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/phys.png" width=100%></a></center>
+
 
 ---
+class: bg-main1
 # PTSD 네트워크 분석
 
 [qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
 
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/qgraph.png)](http://app.zarathu.com)
+<center><a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/qgraph.png" width=100%></a></center>
+
 
 
 ---
+class: middle bg-main1
+
 # 범용 ShinyApps
+
+---
+class:  bg-main1
+# 데이터 형태따라 분류
 
 데이터 형태에 따라 3개로 따로 만듦. 기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
 
@@ -230,20 +592,16 @@ shinyWidgets::dropdownButton(
 * [반복측정 데이터](http://app.zarathu.com/repeated) - 한 사람이 여러번 측정함, [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) 기반의 분석 필요.
 
 
-* [서베이(survey) 데이터](http://app.zarathu.com/survey) - 샘플가중치 존재(ex: 국건영)
+* [표본조사(survey) 데이터](http://app.zarathu.com/survey) - 샘플가중치 존재(ex: 국건영)
 
 
 * [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
 
 
----
-
-class: center, middle
-
-# Problem
 
 ---
-# 파일제한 5메가
+class:  bg-main1
+# Problem 1: .yellow[File size limit]
 
 Shiny `fileInput`은 5메가 이하까지만 지원. 
 
@@ -266,19 +624,14 @@ ui <- navbarPage("Basic statistics",
 서버 부하가 부담. 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
 
 ---
-# 인터넷 차단 환경
+class:  bg-main1
+# Problem 2: 인터넷 차단 환경
 
-건강보험 빅데이터 분석실은 인터넷 접속이 원천차단. 
+- 공단 빅데이터 분석실은 인터넷 접속 원천차단. 
 
-- **R**, **Rstudio**, **Rpackage** 파일을 직원에게 미리 보내야 함. 
+- [CRAN](https://cran.r-project.org/) 만 가능.
 
---
-
-심평원 분석실은 CRAN은 다운가능, github은 불가능.
-
---
-
-데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
+- 데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
 
 
 
@@ -286,19 +639,20 @@ ui <- navbarPage("Basic statistics",
 
 ---
 
-class: center, middle
+class: middle bg-main1
 
 # [Rstudio Addins](https://rstudio.github.io/rstudioaddins) 만들기
 
 ---
+class: bg-main1
 # Rstudio Addins
 
 ```{r, fig.cap = "Rstudio Addins: jsmodule packages", out.width="100%"}
-include_graphics("https://camo.githubusercontent.com/96f270fef715ed29c4799a165e6de679def95c92/68747470733a2f2f626c6f672e616e70616e6d616e2e636f2e6b722f706f7374732f323031382d31312d32342d62617369632d62696f737461746973746963732f616464696e2e676966")
+include_graphics("https://github.com/jinseob2kim/jsmodule/raw/master/vignettes/figures/addin.gif")
 ```
 
 ---
-
+class: bg-main1
 # R packages
 
 .large[
@@ -316,14 +670,15 @@ Dependencies
 ]
 
 ---
+class: bg-main1
 ## 패키지 다운로드 수
 
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cran_down.png)](https://ipub.com/dev-corner/apps/r-package-downloads/)
+<center><a href="https://ipub.com/dev-corner/apps/r-package-downloads/"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cran_down.png" width=100%></a></center>
 
 
 
 ---
-
+class: bg-main1
 # 데이터를 입력변수로 받는 함수 만들기. 
 
 - ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
@@ -349,7 +704,7 @@ server <- function(input, output, session) {
 ```
 
 ---
-
+class: bg-main1
 ```{r, echo =T, eval = F}
 ## Addin function
 
@@ -389,6 +744,7 @@ https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
 
 
 ---
+class: bg-main1
 # [miniUI](https://github.com/rstudio/miniUI)
 
 - Gadget용 간소화된 UI
@@ -398,7 +754,7 @@ include_graphics("https://github.com/rstudio/miniUI/raw/master/tools/tabs.gif")
 ```
 
 ---
-
+class: bg-main1
 ```{r, echo = T, eval = F, out.width="50%"}
 ui <- miniPage(
   gadgetTitleBar("Shiny gadget example"),
@@ -433,6 +789,7 @@ ui <- miniPage(
 
 
 ---
+class: bg-main1
 # 그러나 난..
 
 .large[
@@ -445,6 +802,7 @@ ui <- miniPage(
 ]
 
 ---
+class: bg-main1
 # Addin 함수 만들기
 
 - 드래그된 데이터이름을 인식하여 Gadget을 실행함
@@ -469,6 +827,7 @@ jsBasicAddin <- function(){
 
 
 ---
+class: bg-main1
 # **addins.dcf** 파일 만들기. 
 
 R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
@@ -483,13 +842,14 @@ Interactive: true
 https://github.com/jinseob2kim/jsmodule/blob/master/inst/rstudio/addins.dcf
 
 ---
-
+class: bg-main1
 ```{r, fig.cap = "Addin tab", out.width="80%"}
 include_graphics("addin.png")
 ```
 
 
 ---
+class: bg-main1
 # 개발 & 배포환경 
 
 개발, 맞춤형 앱
@@ -517,13 +877,13 @@ include_graphics("addin.png")
 
 
 ---
-
-class: center, middle
+class: middle, bg-main1
 
 # R package 관리
 
 
 ---
+class: bg-main1
 # 패키지 상태 표현: Badge
 
 [![Build Status](https://travis-ci.org/jinseob2kim/jstable.svg?branch=master)](https://travis-ci.org/jinseob2kim/jstable) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/jstable)](https://cran.r-project.org/package=jstable) [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/jstable)](https://CRAN.R-project.org/package=jstable) [![codecov](https://codecov.io/github/jinseob2kim/jstable/branch/master/graphs/badge.svg)](https://codecov.io/github/jinseob2kim/jstable) 
@@ -546,6 +906,7 @@ https://shields.io/ 에서 내 상태에 해당하는 뱃지를 얻을 수 있�
 - **오류는 없고**, **인기는 많은** 패키지임을 과시?
 
 ---
+class: bg-main1
 # 패키지 설명: 홈페이지 
 
 ```{r,  out.width="80%"}
@@ -555,6 +916,7 @@ include_graphics("pkgdown.png")
 https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
 
 ---
+class: bg-main1
 # 홈페이지, test coverage를 자동으로 만들자.
 
 .large[
@@ -567,6 +929,7 @@ https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, htt
 
 
 ---
+class:  bg-main1
 # [pkgdown](https://pkgdown.r-lib.org/)
 
 패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdown()`으로 기본 설정 생성.
@@ -594,6 +957,7 @@ template:
 ```
 
 ---
+class:  bg-main1
 # 홈페이지 만들기 
 
 `build_site()` 실행하면 **/docs** 폴더에 홈페이지 만들어짐. 
@@ -608,6 +972,7 @@ include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-1
 
 
 ---
+class:  bg-main1
 # [testthat](http://testthat.r-lib.org/)
 
 함수의 테스트 코드를 작성하고 평가.
@@ -636,6 +1001,7 @@ test_that("Run cox2.display", {
 
 
 ---
+class:  bg-main1
 # [covr](https://covr.r-lib.org/)
 
 코드 테스트 리포트를 제공하는 [Codecov](https://codecov.io/)나 [Coveralls](https://coveralls.io/)를 위한 R 패키지.
@@ -650,6 +1016,7 @@ include_graphics("codecov.png")
 
 
 ---
+class: bg-main1
 # 귀찮다
 
 .large[
@@ -668,7 +1035,7 @@ include_graphics("codecov.png")
 ]
 
 ---
-
+class: bg-main1
 ```{r, out.width="75%"}
 include_graphics("https://nesoy.github.io/assets/posts/20170105/travis-ci.jpg")
 ```
@@ -687,7 +1054,7 @@ https://travis-ci.org/jinseob2kim/jsmodule/jobs/495263115
 
 
 ---
-
+class:  bg-main1
 ```yaml
 language: r
 cache:
@@ -724,7 +1091,7 @@ matrix:
 
 
 ---
-
+class:  bg-main1
 # [travis-ci](https://travis-ci.org/) with R package
 
 - `usethis::use_travis()` 로 **.travis.yml** 기본 설정파일 생성.
@@ -738,6 +1105,7 @@ cache: packages
 ```
 
 ---
+class:  bg-main1
 # Codecov
 
 `usethis::use_coverage("codecov")` 로 **.travis.yml** 에 `covr::codecov()` 실행 추가.
@@ -755,6 +1123,7 @@ after_success:
 ```
 
 ---
+class:  bg-main1
 # 홈페이지 빌드, 배포
 
 [travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 **gh-pages 브랜치와 key**가 필요.
@@ -765,7 +1134,7 @@ include_graphics("gh-pages.png")
 
 
 ---
-
+class:  bg-main1
 1. github에서 **gh-pages** 브랜치 만들기.
 
 2. **key** 생성: `travis::use_travis_deploy()` 를 **로컬 환경**에서 실행.
@@ -790,6 +1159,7 @@ https://pkgdown.r-lib.org/reference/deploy_site_github.html
 
 
 ---
+class:  bg-main1
 # [appveyor](https://travis-ci.org/)
 
 .large[
@@ -809,6 +1179,7 @@ https://pkgdown.r-lib.org/reference/deploy_site_github.html
 ]
 
 ---
+class:  bg-main1
 ```yaml
 # DO NOT CHANGE the "init" and "install" sections below
 
@@ -859,11 +1230,12 @@ artifacts:
 
 
 ---
-class: center, middle
+class: middle, bg-main1
 
 # CRAN 배포
 
 ---
+class:  bg-main1
 # 평소에 잘 관리하자!
 
 .large[
@@ -886,6 +1258,7 @@ class: center, middle
 http://r-pkgs.had.co.nz/release.html
 
 ---
+class:  bg-main1
 # 오타, 대소문자 
 
 > Thanks, please write package names, software names and API names in 
@@ -910,6 +1283,7 @@ Date: 2019-02-19
 ```
 
 ---
+class: bg-main1
 # 필수 markdown
 
 https://CRAN.R-project.org/package=jskm 
@@ -921,6 +1295,7 @@ https://CRAN.R-project.org/package=jskm
 - **cran-comments.md**: 패키지 자체 테스트 결과를 적는다.
 
 ---
+class: bg-main1
 # cran-comments.md 예시
 
 ```md
@@ -948,6 +1323,7 @@ There are currently no downstream dependencies for this package
 
 
 ---
+class: bg-main1
 # Vignette
 
 .large[
@@ -960,6 +1336,7 @@ There are currently no downstream dependencies for this package
 
 
 ---
+class:  bg-main1
 # 함수 설명, example
 
 > Please omit example code that looks like this one:
@@ -987,6 +1364,7 @@ DETAILS
 
 
 ---
+class: bg-main1
 # interactive() examples
 
 >Thanks, unfortunately, your ceode is never tested at runtime, as you 
@@ -1004,6 +1382,7 @@ https://cransays.itsalocke.com/articles/dashboard.html
 
 
 ---
+class:  bg-main1
 # CRAN release 신청
 
 .large[
@@ -1020,6 +1399,7 @@ https://cransays.itsalocke.com/articles/dashboard.html
 ]
 
 ---
+class: bg-main1
 # CRAN-RELEASE
 
 ```sh
@@ -1038,6 +1418,7 @@ https://github.com/jinseob2kim/jstable/releases
 
 
 ---
+class: bg-main1
 # Executive Summary 
 
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
@@ -1056,10 +1437,11 @@ https://github.com/jinseob2kim/jstable/releases
 
 
 ---
+class: bg-main1 middle
+#Thanks!
 
-class: center, middle
+<center><img src="https://raw.githubusercontent.com/will-r-chase/blog/master/static/slides/slide_img/thank_you.gif" width=80%></center>
 
-# END
 
 
 
