@@ -1,24 +1,18 @@
 ---
 title: "From ShinyApps to CRAN"
 subtitle: "RUCK 2019 (작업중)"
-author: "김진섭"
-institute: "차라투(주)"
-date: "`r Sys.Date()`"
+institute: Zarathu Co., Ltd
+author: "<br><br>Jinseob Kim; [`r anicon::faa('github', animate='float', rtext='jinseob2kim')`](https://github.com/jinseob2kim)"
+date: "<br><br>2018-10-25, Updated: `r Sys.Date()`"
 output:
   xaringan::moon_reader:
-    css: ["css/footer-header.css", "default"]
-    lib_dir: libs
-    nature:
-      beforeInit: "js/macros.js"
-      slideNumberFormat: |
-        <div class="progress-bar-container">
-          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
-          </div>
-        </div>
+     lib_dir: libs
+     css: ["shinobi", "ninjutsu" , "assets/ninpo.css"]
+     nature:
+      ratio: "4:3"
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: true
-      ratio: "4:3" 
+      countIncrementalSlides: false 
 ---
 
 ```{r setup, include=FALSE}
@@ -28,8 +22,8 @@ library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown)
 ```
 
 
+class:  bg-main1
 
----
 # Executive Summary 
 
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
@@ -48,48 +42,147 @@ library(knitr);library(DT);library(dplyr);library(data.table);library(rmarkdown)
 
 
 --
-- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하고, .yellow[V1.0.1] 까지 업데이트 하였다.
 
 
 
 ---
 
-class: center, middle
+class: middle bg-main1
 
 # ShinyApps
 
 
 ---
+class:  bg-main1
+
 # 맞춤형 ShinyApps
 
-* 안과 
-    + 시야 데이터 분석
+* 통계 분석
+    + 일반 데이터: Table 1, 회귀분석, 생존분석
     
-    + 국민건강영양조사 백내장/안검하수 연구
+    + 반복측정: GEE(Generalized Estimating Equation)
     
+    + 표본조사: [국민건강영양조사](https://knhanes.cdc.go.kr/knhanes/main.do)
+    
+    + Propensity score 분석: Matching, IPTW
 
-* 내과 
-    + 심혈관질환 위험 요인 생존분석
     
-    + 심혈관 생리학 지표 계산 
-    
-    + 대장암 위험 요인 생존분석
-    
-    + 타 연구결과 정리
-    
-    
+* [공통데이터모델(Common Data Model, CDM)](http://www.feedernet.org/html/) 결과 확인.
 
+* 심혈관 생리학 지표 계산: .yellow[드래그] 
 
-* 정신건강의학과
-    + 외상후 스트레스 장애 네트워크 분석
+* 정신질환 .yellow[네트워크 분석]
+
 
 
 ---
-# 시야데이터: 일반적인 통계
+class:  bg-main1
 
-기술통계, 회귀/생존분석, 간단한 그림
+# 일반데이터: 시야
 
-[![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/VF.png)](http://app.zarathu.com)
+### 기술통계, 회귀/생존분석, 간단한 그림
+
+<a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/VF.png" width=100%></a>
+
+
+
+---
+class:  bg-main1
+
+# 신장이식 
+
+### 기술통계, 회귀/생존분석, 맞춤형 그림
+
+<a href="http://147.47.68.165:1111/LeeKW/KTsym/"><img src="ktsym.jpg" width=100%></a>
+
+
+---
+class:  bg-main1
+
+# Tip: 그림 편집
+
+.large[
+Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
+
+- `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
+
+
+- `emf` 확장자: [devEMF](https://cran.r-project.org/package=devEMF) 패키지 이용, **PPT**에서 편집, `ggsave()` 지원 안함.
+
+
+ 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
+ ]
+
+---
+class:  bg-main1
+# Example: `emf`
+
+**PPT** 정확한 그림인식 위해 .yellow[`emfPlus = F`] 옵션 필수!
+
+```{r, echo = T, eval = F}
+library(devEMF)
+*emf("plot.emf", width = 7, height = 7, emfPlus = F)
+ggplot(mtcars, aes(mpg, cyl)) + geom_point()
+dev.off()
+```
+
+```{r, out.width= "70%"}
+include_graphics("https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/zzz.png")
+```
+
+---
+class:  bg-main1
+
+# Tip: 테이블 다운로드 
+
+[DT](https://rstudio.github.io/DT) 패키지의 `datatable` 함수
+
+```{r, eval = F, echo= T}
+datatable(
+*   iris, extensions = 'Buttons', options = list(
+*   dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
+*   buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    scrollX = T      # Scrolling X axis
+  )
+)
+```
+
+세부 `dom` 설정은 [여기](https://datatables.net/reference/option/dom) 
+
+---
+class:  center
+
+```{r}
+datatable(
+  iris, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    scrollX = T      # Scrolling X axis
+  )
+)
+```
+
+---
+class:  bg-main1
+# Tip: `dropdownButton`
+
+### [shinyWidgets](https://github.com/dreamRs/shinyWidgets) Package
+
+```{r, out.width="50%", fig.show = "hold",  fig.align = "default"}
+knitr::include_graphics(c('https://github.com/dreamRs/shinyWidgets/raw/master/man/figures/dropdown_btn_off.png', 'https://github.com/dreamRs/shinyWidgets/raw/master/man/figures/dropdown_btn_on.png'))
+```
+
+
+```r
+shinyWidgets::dropdownButton(
+  tags$h3("List of Input"),
+  selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
+  selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
+  sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
+  circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
+  tooltip = tooltipOptions(title = "Click to see inputs !"))
+```
 
 
 
@@ -109,76 +202,6 @@ class: center, middle
 [![](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png)](http://app.zarathu.com)
 
 
----
-# 맞춤형 그림
-
-논문 맞춤형 [그림](https://ildiczeller.com/2018/02/11/downloadable-ggplots-in-shiny/)과 [테이블](https://rstudio.github.io/DT/extensions.html)을 다운로드
-
-
-.pull-left[
-[![Hazard ratio](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/geeplot1.png)](http://app.zarathu.com)
-
-]
-
-.pull-right[
-[![Time dependent ROC](https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/geeplot2.png)](http://app.zarathu.com)
-]
- 
----
-# 테이블 다운로드 예
-
-[DT](https://rstudio.github.io/DT) 패키지의 `datatable` 함수
-
-```{r, eval = F, echo= T}
-datatable(
-*   iris, extensions = 'Buttons', options = list(
-*   dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
-*   buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
-    scrollX = T      # Scrolling X axis
-  )
-)
-```
-
-세부 `dom` 설정은 [여기](https://datatables.net/reference/option/dom) 
-
----
-
-```{r}
-datatable(
-  iris, extensions = 'Buttons', options = list(
-    dom = 'Bfrtip',  # Button, filter, processing, table, information, pagination                              
-    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
-    scrollX = T      # Scrolling X axis
-  )
-)
-```
-
----
-# 그림 다운로드
-
-Shiny에서 모든 편집옵션 지원불가, 직접 편집 가능해야 함.
-
-* `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
-
-* `emf` 확장자: [devEMF](https://cran.r-project.org/package=devEMF) 패키지 이용, **PPT**에서 편집, `ggsave()` 지원 안함.
-
-윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능. 
-
----
-# Example: `emf`
-
-**PPT** 정확한 그림인식 위해 **emfPlus = F** 옵션 필수!
-
-```{r, echo = T, eval = F}
-library(devEMF)
-emf("plot.emf", width = 7, height = 7, emfPlus = F)
-ggplot(mtcars, aes(mpg, cyl)) + geom_point()
-dev.off()
-```
-
-```{r, out.width= "70%"}
-include_graphics("https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/zzz.png")
-```
 
 
 ---
