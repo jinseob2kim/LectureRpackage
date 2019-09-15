@@ -782,8 +782,11 @@ class: middle, bg-main1
 
 ---
 class: bg-main1
-# 함수 문서 작성: [sinew](https://github.com/metrumresearchgroup/sinew) addin with [roxygen2](https://CRAN.R-project.org/package=roxygen2) 
+# 함수 문서: [sinew](https://github.com/metrumresearchgroup/sinew) addin with [roxygen2](https://CRAN.R-project.org/package=roxygen2) 
 
+.yellow[함수 읽은 후] 실행 
+<br>
+<center><a href="https://github.com/metrumresearchgroup/sinew"><img src="sinew.gif" width=100%></a></center>
 
 
 
@@ -819,18 +822,6 @@ include_graphics("pkgdown.png")
 ```
 
 https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
-
----
-class: bg-main1, middle
-# 홈페이지, test coverage 자동화.
-
-
-### 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
-
-### test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
-
-### 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
-
 
 
 ---
@@ -872,13 +863,13 @@ class:  bg-main1
 include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-11e6-8086-ce1d246a87d2.png?fit=1460%2C860")
 ```
 
-나중엔 [travis-ci](https://travis-ci.org/)를 이용, **gh-pages** 브랜치에 자동 배포.
+### 나중엔 [travis-ci](https://travis-ci.org/)를 이용, .yellow[gh-pages] 브랜치에 자동 배포.
 
 
 
 ---
 class:  bg-main1
-# [testthat](http://testthat.r-lib.org/)
+# Test code 넣기: [testthat](http://testthat.r-lib.org/)
 
 함수의 테스트 코드를 작성하고 평가.
 
@@ -919,6 +910,27 @@ class:  bg-main1
 include_graphics("codecov.png")
 ```
 
+---
+class: bg-main1
+# Tip 8: Insert test code in [roxygen2](https://cran.r-project.org/package=roxygen2)
+
+### [roxytest](https://github.com/mikldk/roxytest) package
+
+```r
+#' A function to do y
+#' 
+#' @param x Character vector
+#' @param y Character vector
+#' 
+*#' @tests 
+*#' expect_equal(bar("A", "B"), paste("A", "B", sep = "/"))
+#' 
+#' @export
+bar <- function(x, y) {
+  paste0(x, "/", y)
+}
+```
+
 
 ---
 class: bg-main1
@@ -938,6 +950,18 @@ class: bg-main1
 - 맥이나 윈도우에서 실행이 보장안됨.
 
 ]
+
+---
+class: bg-main1
+# 홈페이지, test coverage 자동화.
+
+
+### 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
+
+### test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+
+### 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
+
 
 ---
 class: bg-main1
@@ -1204,9 +1228,9 @@ https://CRAN.R-project.org/package=jskm
 
 ### .yellow[README.md]: CRAN의 REAMDE
 
-### .yellowNews.md]: CRAN의 NEWS
+### .yellow[News.md]: CRAN의 NEWS
 
-### .yellowcran-comments.md]: 패키지 자체 테스트 결과를 적는다.
+### .yellow[cran-comments.md]: 패키지 자체 테스트 결과를 적는다.
 
 ---
 class: bg-main1
@@ -1321,11 +1345,37 @@ Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
 
 --
 
-### CRAN 배포 확정되면 해당 commit 번호로 release
+.yellow[CRAN] 배포 확정되면 해당 commit 번호로 release
 
-https://github.com/jinseob2kim/jstable/releases
+<center><a href="https://github.com/jinseob2kim/jstable/releases"><img src="release.png" width=60%></a></center>
 
 
+---
+class: bg-main1
+# Update
+
+### .yellow[CRAN] 등록보다는 수월함. 잦은 업데이트 자제.
+
+.yellow[CRAN]
+.blockquote.font_large[
+Thanks, we see:
+
+   Days since last update: 5
+   Number of updates in past 6 months: 10
+
+Why is such a quick update needed? Please explain. Please also re-read
+the CRAN policies about submission frequency.]
+
+--
+.yellow[Me]
+
+.blockquote.font_large[
+I`m sorry. I update many feature & fix bugs recently.
+please cancel my submit. I will follow CRAN policies.
+
+sincerely.
+jinseob kim
+]
 
 ---
 class: bg-main1
@@ -1343,15 +1393,11 @@ class: bg-main1
 - **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 앞의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
 
 
-- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하였다. 
+- 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하고, .yellow[V1.0.1] 까지 업데이트 하였다.
 
 
 ---
 class: bg-main1 middle
 #Thanks!
 
-<center><img src="https://raw.githubusercontent.com/will-r-chase/blog/master/static/slides/slide_img/thank_you.gif" width=80%></center>
-
-
-
-
+### Shiny 스터디 [`r anicon::faa('github', animate='float', rtext='shinykorea')`](https://github.com/shinykorea)
