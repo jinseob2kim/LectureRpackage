@@ -1363,18 +1363,16 @@ Thanks, we see:
    Days since last update: 5
    Number of updates in past 6 months: 10
 
-Why is such a quick update needed? Please explain. Please also re-read
+.yellow[Why is such a quick update needed? Please explain]. Please also re-read
 the CRAN policies about submission frequency.]
 
 --
 .yellow[Me]
 
 .blockquote.font_large[
-I`m sorry. I update many feature & fix bugs recently.
+.yellow[I`m sorry]. I update many feature & fix bugs recently.
 please cancel my submit. I will follow CRAN policies.
 
-sincerely.
-jinseob kim
 ]
 
 ---
@@ -1401,3 +1399,4 @@ class: bg-main1 middle
 #Thanks!
 
 ### Shiny 스터디 [`r anicon::faa('github', animate='float', rtext='shinykorea')`](https://github.com/shinykorea)
+
