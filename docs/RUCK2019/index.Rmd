@@ -780,6 +780,12 @@ class: middle, bg-main1
 
 # R package 관리
 
+---
+class: bg-main1
+# 함수 문서 작성: [sinew](https://github.com/metrumresearchgroup/sinew) addin with [roxygen2](https://CRAN.R-project.org/package=roxygen2) 
+
+
+
 
 ---
 class: bg-main1
@@ -1128,7 +1134,7 @@ artifacts:
 
 ---
 class: bg-main1, middle
-# Tip 8: [tic](https://github.com/ropenscilabs/tic) - CI setting
+# Tip 9: [tic](https://github.com/ropenscilabs/tic) - CI setting
 
 ### [pkgdown](https://pkgdown.r-lib.org/), [Codecov](https://codecov.io/), [travis-ci](https://travis-ci.org/), [appveyor](https://travis-ci.org/) 를 한번에 처리
 
