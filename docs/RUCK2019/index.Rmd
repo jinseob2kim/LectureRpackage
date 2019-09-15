@@ -26,6 +26,7 @@ class:  bg-main1
 
 # Executive Summary 
 
+
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
 
 
@@ -102,8 +103,7 @@ class:  bg-main1
 
 # Tip 1: 그림 편집
 
-.large[
-Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
+### Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
 
 - `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
 
@@ -111,14 +111,14 @@ Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해�
 - `emf` 확장자: [devEMF](https://cran.r-project.org/package=devEMF) 패키지 이용, **PPT**에서 편집, `ggsave()` 지원 안함.
 
 
- 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
- ]
+- 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
+
 
 ---
 class:  bg-main1
 # Example: `emf`
 
-**PPT** 정확한 그림인식 위해 .yellow[`emfPlus = F`] 옵션 필수!
+### **PPT** 정확한 그림인식 위해 .yellow[`emfPlus = F`] 옵션!
 
 ```{r, echo = T, eval = F}
 library(devEMF)
@@ -185,91 +185,16 @@ shinyWidgets::dropdownButton(
 ```
 
 ---
-class: middle bg-main1
-
-# Tip 4: Login module for ShinyApps
-
-
----
-class: middle bg-main1
-
-# Executive Summary 
-
-<br>
-
-### [shinymanager](https://github.com/datastorm-open/shinymanager) 로 .yellow[UI 종류에 상관없이], 간단하게 로그인기능을 추가한다.
-
-
-### [SQLite db](https://db.rstudio.com/databases/sqlite/) 를 이용, 접속자와 그 log를 관리한다.
-
-
----
-class: middle bg-main1
-
-# [shinymanager](https://github.com/datastorm-open/shinymanager) 없던 시절..
-
-
----
 class: bg-main1
 
-# 직접 만들기 
+# Tip 4: [shinymanager](https://github.com/datastorm-open/shinymanager) - login module
 
-### `passwordInput` in shiny
+<a href="http://shinyapps.dreamrs.fr/shinymanager-demo/"><img src="https://github.com/datastorm-open/shinymanager/raw/master/man/figures/shinymanager-login.png" width=100%></a>
 
-
-<a href="https://stackoverflow.com/questions/41168459/r-shiny-user-authentication-for-single-app-r"><img src="https://i.stack.imgur.com/BUqXR.png " width=100%></a>
-
-
-### 뭔가 아쉽다.
-
-http://app.zarathu.com/password-exam/
+example id & password: .yellow[shinymanager]
 
 
----
-class: bg-main1
-
-# [Google Auth0](https://auth0.com/blog/adding-authentication-to-shiny-server/) 
-
-```{r, out.width="80%"}
-include_graphics("https://raw.githubusercontent.com/zarathucorp/dhh2018/master/img/auth0.gif")
-```
-
-### 복잡, App 별로 따로 안되는듯.
-
-
----
-class: bg-main1
-
-# [shinyauthr](https://github.com/PaulC91/shinyauthr)
-
-```{r, out.width="100%"}
-include_graphics("https://user-images.githubusercontent.com/30856173/49153332-bb7a0900-f315-11e8-8a06-2375d299a766.png")
-```
-
-<br><br>
-### 쉬움. https://cultureofinsight.shinyapps.io/shinyauthr/
-
-### navbar UI 에 적용이 어려움. http://app.zarathu.com/basicpass/
-
-
----
-class: bg-main1
-
-# [useR 2019 후기](https://ryo-n7.github.io/2019-07-21-user2019-reflections/)를 읽던 중
-
-```{r, out.width="100%"}
-knitr::include_graphics("https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/user2019_shinymanager.jpg")
-```
-
-
-
----
-class: middle bg-main1
-
-# [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
-
-
-
+### 쉽게 로그인 모듈 추가 & 로그 수집
 
 ---
 layout: true
@@ -437,13 +362,11 @@ class:
 
 
 
-
-
 ---
 layout: false
 class: bg-main1
 
-# .yellow[Caution] 
+# .yellow[Caution]: Tip 4 end
 
 <br><br><br><br>
 
@@ -457,43 +380,6 @@ https://github.com/datastorm-open/shinymanager/issues/6
 
 
 
----
-class: bg-main1
-
-# Secure .yellow[DB] with [keyring](https://github.com/r-lib/keyring) package
-
-
-```r
-library(keyring)
-key_set("R-shinymanager-key", "appname")
-```
-
-```{r, out.width="80%"}
-include_graphics("https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/keyring.jpg")
-```
-
-
----
-class:bg-main1
-
-# When create .yellow[DB]
-
-```r
-create_db(
-  credentials_data = credentials,
-  sqlite_path = "database.sqlite", 
-* passphrase = key_get("R-shinymanager-key", "appname")
-)
-```
-
---
-# .yellow[Caution]
-
-.blockquote.font_large[
-Linux 에선 key 가 `environment variables` 로 저장됨.<br><br>
-Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 추가해야 함.
-]
-
 
 
 
@@ -501,7 +387,7 @@ Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 
 class: bg-main1
 # 반복측정: 심혈관질환 위험요인
 
- [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
+### [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
 
 <a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png" width=100%></a>
 
@@ -512,7 +398,7 @@ class: bg-main1
 class: bg-main1
 # 표본조사: 국민건강영양조사
 
-[survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
+### [survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
 
 <a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cataract.png" width=100%></a>
 
@@ -522,7 +408,7 @@ class: bg-main1
 
 # Propensity score: 심혈관시술 효과
 
-[MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching & IPTW]
+### [MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching & IPTW]
 
 <center><a href="http://147.47.68.165:1111/COBIS_gacheon/"><img src="ps.jpg" width=80%></a></center>
 
@@ -531,7 +417,7 @@ class: bg-main1
 class: bg-main1
 # 공통데이터모델(CDM) 결과 확인.
 
-[zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
+### [zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
 
 <center><a href="http://147.47.68.165:1111/cdm/estimation"><img src="cdm.jpg" width=80%></a></center>
 
@@ -540,7 +426,7 @@ class: bg-main1
 
 # Tip 5: Don't use `utils::zip` 
 
-기본함수인 `utils::zip` 은 .yellow[shiny] 와 궁합이 안좋음. `directory` 인식 문제
+### 기본함수인 `utils::zip` 은 .yellow[shiny] 와 궁합이 안좋음. `directory` 인식 문제
 
 ```r
 userFile <- eventReactive(input$file, {
@@ -560,18 +446,47 @@ data <- eventReactive(input$file, {
 class: bg-main1
 # 심혈관 생리지표 계산
 
-최대최소값 표시 & [brush](https://shiny.rstudio.com/articles/plot-interaction.html) 이용 [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
-
+### 최대최소값 표시 & [brush](https://shiny.rstudio.com/articles/plot-interaction.html) 이용 [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
+<br>
 <center><a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/phys.png" width=100%></a></center>
+
+---
+class: bg-main1
+# Tip 6: [brush](https://shiny.rstudio.com/articles/plot-interaction.html) - interactive with Drag
+<br>
+<center><a href="https://shiny.rstudio.com/articles/plot-interaction.html"><img src="https://user-images.githubusercontent.com/1365941/46086339-7d256980-c16d-11e8-95a9-60c1cae9aa37.gif" width=100%></a></center>
+
+### Other options: .yellow[click, dblclick], and .yellow[hover]
 
 
 ---
 class: bg-main1
 # PTSD 네트워크 분석
 
-[qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
+### [qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
 
 <center><a href="http://app.zarathu.com"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/qgraph.png" width=100%></a></center>
+
+---
+class: bg-main1
+# Tip 7: [colourpicker](https://github.com/daattali/colourpicker) - color UI 
+
+```r
+library(shiny)
+shinyApp(
+    ui = fluidPage(
+*       colourInput("col", "Select colour", "purple", palette = "limited"),
+        plotOutput("plot")
+    ),
+    server = function(input, output) {
+        output$plot <- renderPlot({
+            set.seed(1)
+            plot(rnorm(50), bg = input$col, col = input$col, pch = 21)
+        })
+    }
+)
+
+```
 
 
 
@@ -584,30 +499,30 @@ class: middle bg-main1
 class:  bg-main1
 # 데이터 형태따라 분류
 
-데이터 형태에 따라 3개로 따로 만듦. 기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
+기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
 
-* [일반 데이터](http://app.zarathu.com/basic)
-
-
-* [반복측정 데이터](http://app.zarathu.com/repeated) - 한 사람이 여러번 측정함, [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) 기반의 분석 필요.
+### - [일반 데이터](http://app.zarathu.com/basic)
 
 
-* [표본조사(survey) 데이터](http://app.zarathu.com/survey) - 샘플가중치 존재(ex: 국건영)
+### - [반복측정 데이터](http://app.zarathu.com/repeated): [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) based
 
 
-* [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
+### - [표본조사(survey) 데이터](http://app.zarathu.com/survey): 샘플가중치(ex: 국건영)
+
+
+### - [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
 
 
 
 ---
 class:  bg-main1
-# Problem 1: .yellow[File size limit]
+# Problem: .yellow[File size limit]
 
-Shiny `fileInput`은 5메가 이하까지만 지원. 
+### Shiny `fileInput`은 5메가 이하까지만 지원. 
 
 --
 
-사실, 용량 제한 바꿀 수 있음. `shiny.maxRequestSize` 옵션을 **app.R**에 추가.
+은 아니고, 용량 제한 바꿀 수 있음. 
 
 
 ```{r, echo=T, eval = F}
@@ -621,19 +536,7 @@ ui <- navbarPage("Basic statistics",
 
 --
 
-서버 부하가 부담. 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
-
----
-class:  bg-main1
-# Problem 2: 인터넷 차단 환경
-
-- 공단 빅데이터 분석실은 인터넷 접속 원천차단. 
-
-- [CRAN](https://cran.r-project.org/) 만 가능.
-
-- 데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
-
-
+### 서버 부담, 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
 
 
 
@@ -655,31 +558,30 @@ include_graphics("https://github.com/jinseob2kim/jsmodule/raw/master/vignettes/f
 class: bg-main1
 # R packages
 
-.large[
-[jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules([CRAN](https://cran.r-project.org/package=jsmodule))
-]
+### [jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules([CRAN](https://cran.r-project.org/package=jsmodule))
+
 
 --
-.large[
-Dependencies
+<br><br>
+### Dependencies
 
-- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
+###  [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
 
-- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
-
-]
-
----
-class: bg-main1
-## 패키지 다운로드 수
-
-<center><a href="https://ipub.com/dev-corner/apps/r-package-downloads/"><img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cran_down.png" width=100%></a></center>
+###  [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
 
 
 
 ---
 class: bg-main1
-# 데이터를 입력변수로 받는 함수 만들기. 
+## CRAN download stats
+
+<center><a href="https://ipub.com/dev-corner/apps/r-package-downloads/"><img src="cranstats.png" width=100%></a></center>
+
+
+
+---
+class: bg-main1
+# Step 1: File upload -> Data read
 
 - ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
 
@@ -707,11 +609,9 @@ server <- function(input, output, session) {
 class: bg-main1
 ```{r, echo =T, eval = F}
 ## Addin function
-
 jsBasicGadget <- function(data, nfactor.limit = 20) {
 
 * out <- data.table(data, check.names = T)
-
 
   ui <- navbarPage("Basic statistics",
                    tabPanel("Data",
@@ -724,7 +624,6 @@ jsBasicGadget <- function(data, nfactor.limit = 20) {
   
 *  viewer <- browserViewer(browser = getOption("browser"))
 *  runGadget(ui, server, viewer = viewer)
-  
 ```
 
 --
@@ -745,9 +644,9 @@ https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
 
 ---
 class: bg-main1
-# [miniUI](https://github.com/rstudio/miniUI)
+# Step 2: UI choice 
 
-- Gadget용 간소화된 UI
+### [miniUI](https://github.com/rstudio/miniUI): Gadget용 간소화된 UI
 
 ```{r, fig.cap = "minuUI", out.width="80%"}
 include_graphics("https://github.com/rstudio/miniUI/raw/master/tools/tabs.gif")
@@ -789,23 +688,23 @@ ui <- miniPage(
 
 
 ---
-class: bg-main1
+class: bg-main1, middle
 # 그러나 난..
+<br>
 
-.large[
-미리 만든 ShinyApps와 동일한 환경을 원함.
+### 미리 만든 ShinyApps와 동일한 환경을 원함.
 
-- [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps의 UI 코드 그대로 이용. 
+### [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps 의 UI 코드 그대로 이용. 
 
-- `browserViewer()` 사용 : 웹브라우저에서 실행.
+### `browserViewer()` 사용 : 웹브라우저에서 실행.
 
-]
+
 
 ---
 class: bg-main1
-# Addin 함수 만들기
+# Step 3: .yellow[Addin] 함수 만들기
 
-- 드래그된 데이터이름을 인식하여 Gadget을 실행함
+### 드래그된 데이터이름을 인식하여 Gadget 실행
 
 ```{r, echo=T, eval=F}
 
@@ -830,7 +729,7 @@ jsBasicAddin <- function(){
 class: bg-main1
 # **addins.dcf** 파일 만들기. 
 
-R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
+### R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
 
 ```sh
 Name: Basic statistics
@@ -900,10 +799,10 @@ class: bg-main1
 [![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
 ```
 
-https://shields.io/ 에서 내 상태에 해당하는 뱃지를 얻을 수 있다.
+### https://shields.io/ 에서 내 상태에 해당하는 뱃지 get.
 --
 
-- **오류는 없고**, **인기는 많은** 패키지임을 과시?
+### .yellow[오류는 없고, 인기는 많은] 패키지임을 과시?
 
 ---
 class: bg-main1
@@ -916,16 +815,16 @@ include_graphics("pkgdown.png")
 https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
 
 ---
-class: bg-main1
-# 홈페이지, test coverage를 자동으로 만들자.
+class: bg-main1, middle
+# 홈페이지, test coverage 자동화.
 
-.large[
-- 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
 
-- test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+### 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
 
-- 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
-]
+### test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+
+### 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
+
 
 
 ---
@@ -935,7 +834,7 @@ class:  bg-main1
 패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdown()`으로 기본 설정 생성.
 
 ```yaml
-URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
+URL: https://jinseob2kim.github.io/jstable, https://github.com/jinseob2kim/jstable
 
 development:
   mode: auto
@@ -943,9 +842,9 @@ development:
 authors:
   Jinseob Kim:
     href: https://github.com/jinseob2kim
-  Anpanman:
-    href: https://www.anpanman.co.kr
-    html: <img src="https://raw.githubusercontent.com/anpanmancorp/Anpanman/master/horizontal_anpanman_transparent.png" height="24" />
+  Zarathu:
+    href: https://www.zarathu.com
+    html: <img src="https://raw.githubusercontent.com/zarathucorp/Zarathu/master/horizontal_zarathu_transparent.png" height="24" />
 
 
 template:
@@ -1126,7 +1025,7 @@ after_success:
 class:  bg-main1
 # 홈페이지 빌드, 배포
 
-[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 **gh-pages 브랜치와 key**가 필요.
+[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 .yellow[gh-pages 브랜치와 key]가 필요.
 
 ```{r, out.width="75%"}
 include_graphics("gh-pages.png")
@@ -1135,16 +1034,16 @@ include_graphics("gh-pages.png")
 
 ---
 class:  bg-main1
-1. github에서 **gh-pages** 브랜치 만들기.
+1. github에서 .yellow[gh-pages] 브랜치 만들기.
 
-2. **key** 생성: `travis::use_travis_deploy()` 를 **로컬 환경**에서 실행.
+2. .yellow[key] 생성: `travis::use_travis_deploy()` 를 .yellow[로컬 환경]에서 실행.
 
 ```{r, out.width="100%"}
 include_graphics("key-travis.png")
 ```
 
 --
-**.travis.yml** 에 추가
+.yellow[.travis.yml] 에 추가
 
 ```yaml
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
@@ -1162,21 +1061,20 @@ https://pkgdown.r-lib.org/reference/deploy_site_github.html
 class:  bg-main1
 # [appveyor](https://travis-ci.org/)
 
-.large[
 [travis-ci](https://travis-ci.org/)는 리눅스와 맥만 지원 
 
 - **윈도우** 환경에서 테스트 못함. 
-]
+
 
 --
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
 
-.large[
+
 [appveyor](https://travis-ci.org/)는 리눅스와 **윈도우** 지원
 
 - `usethis::use_appveyor()` 로 기본 **appveyor.yml** 파일 생성.
-]
+
 
 ---
 class:  bg-main1
@@ -1228,6 +1126,16 @@ artifacts:
     name: Bits
 ```
 
+---
+class: bg-main1, middle
+# Tip 8: [tic](https://github.com/ropenscilabs/tic) - CI setting
+
+### [pkgdown](https://pkgdown.r-lib.org/), [Codecov](https://codecov.io/), [travis-ci](https://travis-ci.org/), [appveyor](https://travis-ci.org/) 를 한번에 처리
+
+https://ropenscilabs.github.io/tic/articles/tic.html
+
+
+
 
 ---
 class: middle, bg-main1
@@ -1240,17 +1148,17 @@ class:  bg-main1
 
 .large[
 
-- 빌드 check: WARNING 뿐 아니라 **NOTE**도 없어야됨.
+- .yellow[Build check]: WARNING 뿐 아니라 .yellow[NOTE]도 없어야됨.
 
-- 오타, 대소문자: 특히 **DESCRIPTION** 파일
+- 오타, 대소문자: 특히 .yellow[DESCRIPTION] 파일
 
-- **README, NEWS, cran-comments** 작성. 
+- .yellow[README, NEWS, cran-comments] 작성. 
 
-- 최소 하나의 **vignette**
+- 최소 하나의 .yellow[vignette]
 
-- 함수 설명: 충실하진 않더라도 빠진건 없어야. 
+- 함수 설명: 충실하진 않더라도 .yellow[빠진건 없어야]. 
 
-- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(**NOTE**).
+- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(.yellow[NOTE]).
 
 
 ]
@@ -1261,8 +1169,8 @@ http://r-pkgs.had.co.nz/release.html
 class:  bg-main1
 # 오타, 대소문자 
 
-> Thanks, please write package names, software names and API names in 
-single quotes (e.g. 'RStudio', 'shiny') in Title and Description.
+.blockquote.font_large[ Thanks, please write package names, software names and API names in 
+.yellow[single quotes (e.g. 'RStudio', 'shiny')] in Title and Description]
 
 ```yaml
 Package: jsmodule
@@ -1288,11 +1196,11 @@ class: bg-main1
 
 https://CRAN.R-project.org/package=jskm 
 
-- **README.md**: CRAN의 REAMDE가 됨.
+### .yellow[README.md]: CRAN의 REAMDE
 
-- **News.md**: CRAN의 NEWS가 됨.
+### .yellowNews.md]: CRAN의 NEWS
 
-- **cran-comments.md**: 패키지 자체 테스트 결과를 적는다.
+### .yellowcran-comments.md]: 패키지 자체 테스트 결과를 적는다.
 
 ---
 class: bg-main1
@@ -1326,20 +1234,19 @@ There are currently no downstream dependencies for this package
 class: bg-main1
 # Vignette
 
-.large[
-`usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
+### `usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
 
-- 귀찮으면 README 복붙하자. 
+- 귀찮으면 .yellow[README] 복붙하자. 
 
 - 홈페이지에도 추가됨.
-]
+
 
 
 ---
 class:  bg-main1
 # 함수 설명, example
 
-> Please omit example code that looks like this one:
+.blockquote.font_large[ Please omit .yellow[example code] that looks like this one:]
 
 ```r
 \dontrun{
@@ -1350,7 +1257,7 @@ if(interactive()){
 ```
 
 --
-> We see many Rd files with lines such as
+.blockquote.font_large[ We see many Rd files with lines such as]
 
 ```r
 \details{
@@ -1360,33 +1267,32 @@ DETAILS
   #EXAMPLE1
 }
 ```
-> These should alyways be deleted unless you have ral examples to insert.
+.blockquote.font_large[ These should alyways be deleted unless you have ral examples to insert.]
 
 
 ---
 class: bg-main1
 # interactive() examples
 
->Thanks, unfortunately, your ceode is never tested at runtime, as you 
+.blockquote.font_large[Thanks, unfortunately, your ceode is never tested at runtime, as you 
 only have interactive() examples,if at all, and your test cases do not 
-cover much code.
->Can you perhaps add examples and tests for the non-UI functionality?
+cover much code.]
+
+.blockquote.font_large[Can you perhaps add examples and tests for the non-UI functionality?]
 
 --
 
-.large[
-코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 **CRAN**에 신청한 상태.
+### 코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 .yellow[CRAN] 업로드.
 
 https://cransays.itsalocke.com/articles/dashboard.html
-]
+
 
 
 ---
 class:  bg-main1
 # CRAN release 신청
 
-.large[
-`devtools::release()` 실행
+### `devtools::release()` 실행
 
 - 확인 질문들이 나옴: 문제 없다고 답하면 됨.
 
@@ -1396,7 +1302,7 @@ class:  bg-main1
 
 - 진행과정 메일이 온다. 결정까지 10일 이내
 
-]
+
 
 ---
 class: bg-main1
@@ -1409,9 +1315,7 @@ Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
 
 --
 
-.large[
-CRAN 배포 확정되면 해당 commit 번호로 release
-]
+### CRAN 배포 확정되면 해당 commit 번호로 release
 
 https://github.com/jinseob2kim/jstable/releases
 

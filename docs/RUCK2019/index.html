@@ -36,7 +36,7 @@ class: center, middle, inverse, title-slide
 ## RUCK 2019 (작업중)
 ### <br><br>Jinseob Kim; <a href="https://github.com/jinseob2kim"><span>&lt;i class="fab  fa-github faa-float animated "&gt;&lt;/i&gt;jinseob2kim</span></a>
 ### Zarathu Co., Ltd
-### <br><br>2018-10-25, Updated: 2019-08-30
+### <br><br>2018-10-25, Updated: 2019-09-15
 
 ---
 
@@ -47,6 +47,7 @@ class: center, middle, inverse, title-slide
 class:  bg-main1
 
 # Executive Summary 
+
 
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
 
@@ -124,8 +125,7 @@ class:  bg-main1
 
 # Tip 1: 그림 편집
 
-.large[
-Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
+### Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
 
 - `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
 
@@ -133,14 +133,14 @@ Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해�
 - `emf` 확장자: [devEMF](https://cran.r-project.org/package=devEMF) 패키지 이용, **PPT**에서 편집, `ggsave()` 지원 안함.
 
 
- 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
- ]
+- 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
+
 
 ---
 class:  bg-main1
 # Example: `emf`
 
-**PPT** 정확한 그림인식 위해 .yellow[`emfPlus = F`] 옵션 필수!
+### **PPT** 정확한 그림인식 위해 .yellow[`emfPlus = F`] 옵션!
 
 
 ```r
@@ -175,8 +175,8 @@ datatable(
 ---
 class:  center
 
-<div id="htmlwidget-0b775c0af59f202cb926" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0b775c0af59f202cb926">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv","excel","pdf","print"],"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-26d53519855dbcecc1ce" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-26d53519855dbcecc1ce">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv","excel","pdf","print"],"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 class:  bg-main1
@@ -198,85 +198,16 @@ shinyWidgets::dropdownButton(
 ```
 
 ---
-class: middle bg-main1
-
-# Tip 4: Login module for ShinyApps
-
-
----
-class: middle bg-main1
-
-# Executive Summary 
-
-&lt;br&gt;
-
-### [shinymanager](https://github.com/datastorm-open/shinymanager) 로 .yellow[UI 종류에 상관없이], 간단하게 로그인기능을 추가한다.
-
-
-### [SQLite db](https://db.rstudio.com/databases/sqlite/) 를 이용, 접속자와 그 log를 관리한다.
-
-
----
-class: middle bg-main1
-
-# [shinymanager](https://github.com/datastorm-open/shinymanager) 없던 시절..
-
-
----
 class: bg-main1
 
-# 직접 만들기 
+# Tip 4: [shinymanager](https://github.com/datastorm-open/shinymanager) - login module
 
-### `passwordInput` in shiny
+&lt;a href="http://shinyapps.dreamrs.fr/shinymanager-demo/"&gt;&lt;img src="https://github.com/datastorm-open/shinymanager/raw/master/man/figures/shinymanager-login.png" width=100%&gt;&lt;/a&gt;
 
-
-&lt;a href="https://stackoverflow.com/questions/41168459/r-shiny-user-authentication-for-single-app-r"&gt;&lt;img src="https://i.stack.imgur.com/BUqXR.png " width=100%&gt;&lt;/a&gt;
-
-
-### 뭔가 아쉽다.
-
-http://app.zarathu.com/password-exam/
+example id &amp; password: .yellow[shinymanager]
 
 
----
-class: bg-main1
-
-# [Google Auth0](https://auth0.com/blog/adding-authentication-to-shiny-server/) 
-
-&lt;img src="https://raw.githubusercontent.com/zarathucorp/dhh2018/master/img/auth0.gif" width="80%" style="display: block; margin: auto;" /&gt;
-
-### 복잡, App 별로 따로 안되는듯.
-
-
----
-class: bg-main1
-
-# [shinyauthr](https://github.com/PaulC91/shinyauthr)
-
-&lt;img src="https://user-images.githubusercontent.com/30856173/49153332-bb7a0900-f315-11e8-8a06-2375d299a766.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-&lt;br&gt;&lt;br&gt;
-### 쉬움. https://cultureofinsight.shinyapps.io/shinyauthr/
-
-### navbar UI 에 적용이 어려움. http://app.zarathu.com/basicpass/
-
-
----
-class: bg-main1
-
-# [useR 2019 후기](https://ryo-n7.github.io/2019-07-21-user2019-reflections/)를 읽던 중
-
-&lt;img src="https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/user2019_shinymanager.jpg" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-
----
-class: middle bg-main1
-
-# [shinymanager](https://github.com/datastorm-open/shinymanager) 소개
-
-
-
+### 쉽게 로그인 모듈 추가 &amp; 로그 수집
 
 ---
 layout: true
@@ -442,13 +373,11 @@ class:
 
 
 
-
-
 ---
 layout: false
 class: bg-main1
 
-# .yellow[Caution] 
+# .yellow[Caution]: Tip 4 end
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
@@ -462,41 +391,6 @@ https://github.com/datastorm-open/shinymanager/issues/6
 
 
 
----
-class: bg-main1
-
-# Secure .yellow[DB] with [keyring](https://github.com/r-lib/keyring) package
-
-
-```r
-library(keyring)
-key_set("R-shinymanager-key", "appname")
-```
-
-&lt;img src="https://raw.githubusercontent.com/jinseob2kim/LectureRpackage/master/docs/shinymanager/fig-shinymanager/keyring.jpg" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
-class:bg-main1
-
-# When create .yellow[DB]
-
-```r
-create_db(
-  credentials_data = credentials,
-  sqlite_path = "database.sqlite", 
-* passphrase = key_get("R-shinymanager-key", "appname")
-)
-```
-
---
-# .yellow[Caution]
-
-.blockquote.font_large[
-Linux 에선 key 가 `environment variables` 로 저장됨.&lt;br&gt;&lt;br&gt;
-Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 추가해야 함.
-]
-
 
 
 
@@ -504,7 +398,7 @@ Shiny server 에도 적용하려면 user `shiny` 에도 `environment variables` 
 class: bg-main1
 # 반복측정: 심혈관질환 위험요인
 
- [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
+### [geepack](https://cran.r-project.org/web/packages/geepack/index.html) 패키지 적용, 한 사람이 2개 이상의 심혈관 시술 받음. 
 
 &lt;a href="http://app.zarathu.com"&gt;&lt;img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/gee.png" width=100%&gt;&lt;/a&gt;
 
@@ -515,7 +409,7 @@ class: bg-main1
 class: bg-main1
 # 표본조사: 국민건강영양조사
 
-[survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
+### [survey](http://r-survey.r-forge.r-project.org/survey/) 패키지 적용, 표본가중치 고려한 통계
 
 &lt;a href="http://app.zarathu.com"&gt;&lt;img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cataract.png" width=100%&gt;&lt;/a&gt;
 
@@ -525,7 +419,7 @@ class: bg-main1
 
 # Propensity score: 심혈관시술 효과
 
-[MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching &amp; IPTW]
+### [MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching &amp; IPTW]
 
 &lt;center&gt;&lt;a href="http://147.47.68.165:1111/COBIS_gacheon/"&gt;&lt;img src="ps.jpg" width=80%&gt;&lt;/a&gt;&lt;/center&gt;
 
@@ -534,7 +428,7 @@ class: bg-main1
 class: bg-main1
 # 공통데이터모델(CDM) 결과 확인.
 
-[zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
+### [zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
 
 &lt;center&gt;&lt;a href="http://147.47.68.165:1111/cdm/estimation"&gt;&lt;img src="cdm.jpg" width=80%&gt;&lt;/a&gt;&lt;/center&gt;
 
@@ -543,7 +437,7 @@ class: bg-main1
 
 # Tip 5: Don't use `utils::zip` 
 
-기본함수인 `utils::zip` 은 .yellow[shiny] 와 궁합이 안좋음. `directory` 인식 문제
+### 기본함수인 `utils::zip` 은 .yellow[shiny] 와 궁합이 안좋음. `directory` 인식 문제
 
 ```r
 userFile &lt;- eventReactive(input$file, {
@@ -563,18 +457,47 @@ data &lt;- eventReactive(input$file, {
 class: bg-main1
 # 심혈관 생리지표 계산
 
-최대최소값 표시 &amp; [brush](https://shiny.rstudio.com/articles/plot-interaction.html) 이용 [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
-
+### 최대최소값 표시 &amp; [brush](https://shiny.rstudio.com/articles/plot-interaction.html) 이용 [드래그](https://shiny.rstudio.com/gallery/plot-interaction-advanced.html)한 부분의 생리지표를 계산
+&lt;br&gt;
 &lt;center&gt;&lt;a href="http://app.zarathu.com"&gt;&lt;img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/phys.png" width=100%&gt;&lt;/a&gt;&lt;/center&gt;
+
+---
+class: bg-main1
+# Tip 6: [brush](https://shiny.rstudio.com/articles/plot-interaction.html) - interactive with Drag
+&lt;br&gt;
+&lt;center&gt;&lt;a href="https://shiny.rstudio.com/articles/plot-interaction.html"&gt;&lt;img src="https://user-images.githubusercontent.com/1365941/46086339-7d256980-c16d-11e8-95a9-60c1cae9aa37.gif" width=100%&gt;&lt;/a&gt;&lt;/center&gt;
+
+### Other options: .yellow[click, dblclick], and .yellow[hover]
 
 
 ---
 class: bg-main1
 # PTSD 네트워크 분석
 
-[qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
+### [qgraph](https://CRAN.R-project.org/package=qgraph) 패키지 이용. [colourpicker](https://github.com/daattali/colourpicker), [shinyWidgets](https://github.com/dreamRs/shinyWidgets) 패키지로 색상 선택 UI.
 
 &lt;center&gt;&lt;a href="http://app.zarathu.com"&gt;&lt;img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/qgraph.png" width=100%&gt;&lt;/a&gt;&lt;/center&gt;
+
+---
+class: bg-main1
+# Tip 7: [colourpicker](https://github.com/daattali/colourpicker) - color UI 
+
+```r
+library(shiny)
+shinyApp(
+    ui = fluidPage(
+*       colourInput("col", "Select colour", "purple", palette = "limited"),
+        plotOutput("plot")
+    ),
+    server = function(input, output) {
+        output$plot &lt;- renderPlot({
+            set.seed(1)
+            plot(rnorm(50), bg = input$col, col = input$col, pch = 21)
+        })
+    }
+)
+
+```
 
 
 
@@ -587,30 +510,30 @@ class: middle bg-main1
 class:  bg-main1
 # 데이터 형태따라 분류
 
-데이터 형태에 따라 3개로 따로 만듦. 기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
+기술통계, 회귀분석/생존분석, ROC 분석을 포함. 
 
-* [일반 데이터](http://app.zarathu.com/basic)
-
-
-* [반복측정 데이터](http://app.zarathu.com/repeated) - 한 사람이 여러번 측정함, [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) 기반의 분석 필요.
+### - [일반 데이터](http://app.zarathu.com/basic)
 
 
-* [표본조사(survey) 데이터](http://app.zarathu.com/survey) - 샘플가중치 존재(ex: 국건영)
+### - [반복측정 데이터](http://app.zarathu.com/repeated): [GEE](https://en.wikipedia.org/wiki/Generalized_estimating_equation) based
 
 
-* [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
+### - [표본조사(survey) 데이터](http://app.zarathu.com/survey): 샘플가중치(ex: 국건영)
+
+
+### - [프로펜시티 점수 분석]((http://app.zarathu.com/ps)(experimental)
 
 
 
 ---
 class:  bg-main1
-# Problem 1: .yellow[File size limit]
+# Problem: .yellow[File size limit]
 
-Shiny `fileInput`은 5메가 이하까지만 지원. 
+### Shiny `fileInput`은 5메가 이하까지만 지원. 
 
 --
 
-사실, 용량 제한 바꿀 수 있음. `shiny.maxRequestSize` 옵션을 **app.R**에 추가.
+은 아니고, 용량 제한 바꿀 수 있음. 
 
 
 
@@ -624,19 +547,7 @@ ui &lt;- navbarPage("Basic statistics",
 
 --
 
-서버 부하가 부담. 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
-
----
-class:  bg-main1
-# Problem 2: 인터넷 차단 환경
-
-- 공단 빅데이터 분석실은 인터넷 접속 원천차단. 
-
-- [CRAN](https://cran.r-project.org/) 만 가능.
-
-- 데이터 정리까지만 수행, 분석은 연구자가 직접 할 수 있도록 계획.
-
-
+### 서버 부담, 큰 데이터는 개인 컴퓨터에서 직접 하면 좋겠다. 
 
 
 
@@ -659,31 +570,30 @@ class: bg-main1
 class: bg-main1
 # R packages
 
-.large[
-[jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules([CRAN](https://cran.r-project.org/package=jsmodule))
-]
+### [jsmodule](https://github.com/jinseob2kim/jsmodule): RStudio Addins와 Shiny Modules([CRAN](https://cran.r-project.org/package=jsmodule))
+
 
 --
-.large[
-Dependencies
+&lt;br&gt;&lt;br&gt;
+### Dependencies
 
-- [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
+###  [jstable](https://github.com/jinseob2kim/jstable): 회귀분석 테이블([CRAN](https://cran.r-project.org/package=jstable))
 
-- [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
-
-]
-
----
-class: bg-main1
-## 패키지 다운로드 수
-
-&lt;center&gt;&lt;a href="https://ipub.com/dev-corner/apps/r-package-downloads/"&gt;&lt;img src="https://raw.githubusercontent.com/jinseob2kim/PresentationShinyMed/master/docs/cran_down.png" width=100%&gt;&lt;/a&gt;&lt;/center&gt;
+###  [jskm](https://github.com/jinseob2kim/jskm): 카플란-마이어(Kaplan-meier) 그림([CRAN](https://cran.r-project.org/package=jskm))
 
 
 
 ---
 class: bg-main1
-# 데이터를 입력변수로 받는 함수 만들기. 
+## CRAN download stats
+
+&lt;center&gt;&lt;a href="https://ipub.com/dev-corner/apps/r-package-downloads/"&gt;&lt;img src="cranstats.png" width=100%&gt;&lt;/a&gt;&lt;/center&gt;
+
+
+
+---
+class: bg-main1
+# Step 1: File upload -&gt; Data read
 
 - ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
 
@@ -713,11 +623,9 @@ class: bg-main1
 
 ```r
 ## Addin function
-
 jsBasicGadget &lt;- function(data, nfactor.limit = 20) {
 
 * out &lt;- data.table(data, check.names = T)
-
 
   ui &lt;- navbarPage("Basic statistics",
                    tabPanel("Data",
@@ -750,9 +658,9 @@ https://github.com/jinseob2kim/jsmodule/blob/master/R/jsBasicGadget.R
 
 ---
 class: bg-main1
-# [miniUI](https://github.com/rstudio/miniUI)
+# Step 2: UI choice 
 
-- Gadget용 간소화된 UI
+### [miniUI](https://github.com/rstudio/miniUI): Gadget용 간소화된 UI
 
 &lt;div class="figure" style="text-align: center"&gt;
 &lt;img src="https://github.com/rstudio/miniUI/raw/master/tools/tabs.gif" alt="minuUI" width="80%" /&gt;
@@ -795,23 +703,23 @@ ui &lt;- miniPage(
 
 
 ---
-class: bg-main1
+class: bg-main1, middle
 # 그러나 난..
+&lt;br&gt;
 
-.large[
-미리 만든 ShinyApps와 동일한 환경을 원함.
+### 미리 만든 ShinyApps와 동일한 환경을 원함.
 
-- [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps의 UI 코드 그대로 이용. 
+### [miniUI](https://github.com/rstudio/miniUI) 안함 : ShinyApps 의 UI 코드 그대로 이용. 
 
-- `browserViewer()` 사용 : 웹브라우저에서 실행.
+### `browserViewer()` 사용 : 웹브라우저에서 실행.
 
-]
+
 
 ---
 class: bg-main1
-# Addin 함수 만들기
+# Step 3: .yellow[Addin] 함수 만들기
 
-- 드래그된 데이터이름을 인식하여 Gadget을 실행함
+### 드래그된 데이터이름을 인식하여 Gadget 실행
 
 
 ```r
@@ -836,7 +744,7 @@ jsBasicAddin &lt;- function(){
 class: bg-main1
 # **addins.dcf** 파일 만들기. 
 
-R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
+### R 패키지 `inst/rstudio/addins.dcf` 에 만들기. 
 
 ```sh
 Name: Basic statistics
@@ -907,10 +815,10 @@ class: bg-main1
 [![GitHub license](https://img.shields.io/github/license/jinseob2kim/jstable.svg)](https://github.com/jinseob2kim/jstable/blob/master/LICENSE)
 ```
 
-https://shields.io/ 에서 내 상태에 해당하는 뱃지를 얻을 수 있다.
+### https://shields.io/ 에서 내 상태에 해당하는 뱃지 get.
 --
 
-- **오류는 없고**, **인기는 많은** 패키지임을 과시?
+### .yellow[오류는 없고, 인기는 많은] 패키지임을 과시?
 
 ---
 class: bg-main1
@@ -921,16 +829,16 @@ class: bg-main1
 https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, https://jinseob2kim.github.io/jsmodule/
 
 ---
-class: bg-main1
-# 홈페이지, test coverage를 자동으로 만들자.
+class: bg-main1, middle
+# 홈페이지, test coverage 자동화.
 
-.large[
-- 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
 
-- test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+### 홈페이지: [pkgdown](https://pkgdown.r-lib.org/)
 
-- 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
-]
+### test coverage: [testthat](http://testthat.r-lib.org/), [covr](https://covr.r-lib.org/)
+
+### 자동 배포: [travis-ci](https://travis-ci.org/), [appveyor](https://www.appveyor.com/)
+
 
 
 ---
@@ -940,7 +848,7 @@ class:  bg-main1
 패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdown()`으로 기본 설정 생성.
 
 ```yaml
-URL: https://jinseob2kim.github.io/jskm, https://github.com/jinseob2kim/jstable
+URL: https://jinseob2kim.github.io/jstable, https://github.com/jinseob2kim/jstable
 
 development:
   mode: auto
@@ -948,9 +856,9 @@ development:
 authors:
   Jinseob Kim:
     href: https://github.com/jinseob2kim
-  Anpanman:
-    href: https://www.anpanman.co.kr
-    html: &lt;img src="https://raw.githubusercontent.com/anpanmancorp/Anpanman/master/horizontal_anpanman_transparent.png" height="24" /&gt;
+  Zarathu:
+    href: https://www.zarathu.com
+    html: &lt;img src="https://raw.githubusercontent.com/zarathucorp/Zarathu/master/horizontal_zarathu_transparent.png" height="24" /&gt;
 
 
 template:
@@ -1128,21 +1036,21 @@ after_success:
 class:  bg-main1
 # 홈페이지 빌드, 배포
 
-[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 **gh-pages 브랜치와 key**가 필요.
+[travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 .yellow[gh-pages 브랜치와 key]가 필요.
 
 &lt;img src="gh-pages.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 class:  bg-main1
-1. github에서 **gh-pages** 브랜치 만들기.
+1. github에서 .yellow[gh-pages] 브랜치 만들기.
 
-2. **key** 생성: `travis::use_travis_deploy()` 를 **로컬 환경**에서 실행.
+2. .yellow[key] 생성: `travis::use_travis_deploy()` 를 .yellow[로컬 환경]에서 실행.
 
 &lt;img src="key-travis.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 --
-**.travis.yml** 에 추가
+.yellow[.travis.yml] 에 추가
 
 ```yaml
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
@@ -1160,21 +1068,20 @@ https://pkgdown.r-lib.org/reference/deploy_site_github.html
 class:  bg-main1
 # [appveyor](https://travis-ci.org/)
 
-.large[
 [travis-ci](https://travis-ci.org/)는 리눅스와 맥만 지원 
 
 - **윈도우** 환경에서 테스트 못함. 
-]
+
 
 --
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&amp;svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
 
-.large[
+
 [appveyor](https://travis-ci.org/)는 리눅스와 **윈도우** 지원
 
 - `usethis::use_appveyor()` 로 기본 **appveyor.yml** 파일 생성.
-]
+
 
 ---
 class:  bg-main1
@@ -1226,6 +1133,16 @@ artifacts:
     name: Bits
 ```
 
+---
+class: bg-main1, middle
+# Tip 8: [tic](https://github.com/ropenscilabs/tic) - CI setting
+
+### [pkgdown](https://pkgdown.r-lib.org/), [Codecov](https://codecov.io/), [travis-ci](https://travis-ci.org/), [appveyor](https://travis-ci.org/) 를 한번에 처리
+
+https://ropenscilabs.github.io/tic/articles/tic.html
+
+
+
 
 ---
 class: middle, bg-main1
@@ -1238,17 +1155,17 @@ class:  bg-main1
 
 .large[
 
-- 빌드 check: WARNING 뿐 아니라 **NOTE**도 없어야됨.
+- .yellow[Build check]: WARNING 뿐 아니라 .yellow[NOTE]도 없어야됨.
 
-- 오타, 대소문자: 특히 **DESCRIPTION** 파일
+- 오타, 대소문자: 특히 .yellow[DESCRIPTION] 파일
 
-- **README, NEWS, cran-comments** 작성. 
+- .yellow[README, NEWS, cran-comments] 작성. 
 
-- 최소 하나의 **vignette**
+- 최소 하나의 .yellow[vignette]
 
-- 함수 설명: 충실하진 않더라도 빠진건 없어야. 
+- 함수 설명: 충실하진 않더라도 .yellow[빠진건 없어야]. 
 
-- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(**NOTE**).
+- 함수 example: 가급적 다 넣자. 한줄에 100글자 넘으면 안됨(.yellow[NOTE]).
 
 
 ]
@@ -1259,8 +1176,8 @@ http://r-pkgs.had.co.nz/release.html
 class:  bg-main1
 # 오타, 대소문자 
 
-&gt; Thanks, please write package names, software names and API names in 
-single quotes (e.g. 'RStudio', 'shiny') in Title and Description.
+.blockquote.font_large[ Thanks, please write package names, software names and API names in 
+.yellow[single quotes (e.g. 'RStudio', 'shiny')] in Title and Description]
 
 ```yaml
 Package: jsmodule
@@ -1286,11 +1203,11 @@ class: bg-main1
 
 https://CRAN.R-project.org/package=jskm 
 
-- **README.md**: CRAN의 REAMDE가 됨.
+### .yellow[README.md]: CRAN의 REAMDE
 
-- **News.md**: CRAN의 NEWS가 됨.
+### .yellowNews.md]: CRAN의 NEWS
 
-- **cran-comments.md**: 패키지 자체 테스트 결과를 적는다.
+### .yellowcran-comments.md]: 패키지 자체 테스트 결과를 적는다.
 
 ---
 class: bg-main1
@@ -1324,20 +1241,19 @@ There are currently no downstream dependencies for this package
 class: bg-main1
 # Vignette
 
-.large[
-`usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
+### `usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
 
-- 귀찮으면 README 복붙하자. 
+- 귀찮으면 .yellow[README] 복붙하자. 
 
 - 홈페이지에도 추가됨.
-]
+
 
 
 ---
 class:  bg-main1
 # 함수 설명, example
 
-&gt; Please omit example code that looks like this one:
+.blockquote.font_large[ Please omit .yellow[example code] that looks like this one:]
 
 ```r
 \dontrun{
@@ -1348,7 +1264,7 @@ if(interactive()){
 ```
 
 --
-&gt; We see many Rd files with lines such as
+.blockquote.font_large[ We see many Rd files with lines such as]
 
 ```r
 \details{
@@ -1358,33 +1274,32 @@ DETAILS
   #EXAMPLE1
 }
 ```
-&gt; These should alyways be deleted unless you have ral examples to insert.
+.blockquote.font_large[ These should alyways be deleted unless you have ral examples to insert.]
 
 
 ---
 class: bg-main1
 # interactive() examples
 
-&gt;Thanks, unfortunately, your ceode is never tested at runtime, as you 
+.blockquote.font_large[Thanks, unfortunately, your ceode is never tested at runtime, as you 
 only have interactive() examples,if at all, and your test cases do not 
-cover much code.
-&gt;Can you perhaps add examples and tests for the non-UI functionality?
+cover much code.]
+
+.blockquote.font_large[Can you perhaps add examples and tests for the non-UI functionality?]
 
 --
 
-.large[
-코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 **CRAN**에 신청한 상태.
+### 코멘트들을 반영하여 [jsmodule](https://github.com/jinseob2kim/jsmodule) 다시 .yellow[CRAN] 업로드.
 
 https://cransays.itsalocke.com/articles/dashboard.html
-]
+
 
 
 ---
 class:  bg-main1
 # CRAN release 신청
 
-.large[
-`devtools::release()` 실행
+### `devtools::release()` 실행
 
 - 확인 질문들이 나옴: 문제 없다고 답하면 됨.
 
@@ -1394,7 +1309,7 @@ class:  bg-main1
 
 - 진행과정 메일이 온다. 결정까지 10일 이내
 
-]
+
 
 ---
 class: bg-main1
@@ -1407,9 +1322,7 @@ Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
 
 --
 
-.large[
-CRAN 배포 확정되면 해당 commit 번호로 release
-]
+### CRAN 배포 확정되면 해당 commit 번호로 release
 
 https://github.com/jinseob2kim/jstable/releases
 
