@@ -1,13 +1,13 @@
 ---
 title: "From ShinyApps to CRAN"
-subtitle: "RUCK 2019 (작업중)"
+subtitle: "RUCK 2019"
 institute: Zarathu Co., Ltd
 author: "<br><br>Jinseob Kim; [`r anicon::faa('github', animate='float', rtext='jinseob2kim')`](https://github.com/jinseob2kim)"
-date: "<br><br>2018-10-25, Updated: `r Sys.Date()`"
+date: "<br><br>2018-10-25"
 output:
   xaringan::moon_reader:
      lib_dir: libs
-     css: ["shinobi", "ninjutsu" , "assets/ninpo.css"]
+     css: ["shinobi", "ninjutsu" , "css/footer-header.css"]
      nature:
       ratio: "4:3"
       highlightStyle: github
@@ -26,25 +26,29 @@ class:  bg-main1
 
 # Executive Summary 
 
-
+.large[
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
-
+]
 
 --
+.large[
 - 개인 PC에서 직접 이용할 수 있도록 **[Rstudio Addins](https://rstudio.github.io/rstudioaddins/)**을 포함한 패키지로 만들어 **github**에 배포하였다.
-
+]
 
 --
+.large[
 - **[testthat](https://github.com/r-lib/testthat)**, **[covr](https://github.com/r-lib/covr)**로 코드 테스트를 수행하고 결과 리포트를 만들었으며, **[pkgdown](https://github.com/r-lib/pkgdown)**으로 패키지를 소개하는 웹사이트를 만들었다. 
-
+]
 
 --
+.large[
 - **[Travis CI](https://travis-ci.org/)**와 **[appveyor](https://www.appveyor.com/)**로 앞의 과정과 여러 운영체제에서의 테스트를 자동화하였다. 
-
+]
 
 --
+.large[
 - 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하고, .yellow[V1.0.1] 까지 업데이트 하였다.
-
+]
 
 
 ---
@@ -59,6 +63,7 @@ class:  bg-main1
 
 # 연구지원 분류
 
+.large[
 * 통계 분석
     + 일반 데이터: Table 1, 회귀분석, 생존분석
     
@@ -74,7 +79,7 @@ class:  bg-main1
 * 심혈관 생리학 지표 계산: .yellow[드래그] 
 
 * 정신질환 .yellow[네트워크 분석]
-
+]
 
 
 ---
@@ -105,6 +110,7 @@ class:  bg-main1
 
 ### Shiny에서 모든 편집옵션 지원불가, .yellow[직접 편집] 가능해야 함.
 
+.large[
 - `svg` 확장자: [Cairo](https://CRAN.R-project.org/package=Cairo) 패키지 이용, [Inkscape](https://inkscape.org/ko/)에서 편집. `ggsave()` 지원.
 
 
@@ -112,7 +118,7 @@ class:  bg-main1
 
 
 - 윈도우 환경에서는 `wmf` 확장자 이용,  `ggsave()` 저장 후 **PPT** 편집 가능.
-
+]
 
 ---
 class:  bg-main1
@@ -136,7 +142,9 @@ class:  bg-main1
 
 # Tip 2: 테이블 다운로드 
 
+.large[
 [DT](https://rstudio.github.io/DT) 패키지의 `datatable` 함수
+]
 
 ```{r, eval = F, echo= T}
 datatable(
@@ -583,7 +591,9 @@ class: bg-main1
 class: bg-main1
 # Step 1: File upload -> Data read
 
+.large[
 - ShinyApps의 `fileInput`을, **R**에서 데이터 읽는 것으로 바꿈. 
+]
 
 --
 
@@ -751,26 +761,29 @@ include_graphics("addin.png")
 class: bg-main1
 # 개발 & 배포환경 
 
+.large[
 개발, 맞춤형 앱
 
 * 대학원 서버에 [Docker 이미지](https://cloud.docker.com/u/jinseob2kim/repository/docker/jinseob2kim/docker-rshiny) 설치하여 기생.
     + [R](https://www.r-project.org/), [RStudio server](https://www.rstudio.com/products/rstudio/download-server/), [shiny server](https://www.rstudio.com/products/shiny/download-server/)와 자주 쓰는 패키지를 미리 설치.
-    
---
+]
 
+--
+.large[
 범용 앱
 
 * AWS에 [Docker swarm](https://github.com/jinseob2kim/swarm-setting) 환경 구축.
-    + 부하정도에 따라 자동으로 인스턴스 추가/삭제. 현재 1대면 충분..
-    
+    + 부하정도에 따라 자동 인스턴스 추가/삭제. 1대면 충분..?
+]    
 --
 
+.large[
 코드: [깃허브](https://github.com/jinseob2kim)
 
 * R 패키지, Docker 이미지, 홈페이지/블로그는 public repository
 
 * 맞춤형 앱은 private repository
-
+]
 
 [RUCK2018 발표자료](https://blog.zarathu.com/posts/2018-11-08-ruck2018/)
 
@@ -784,7 +797,10 @@ class: middle, bg-main1
 class: bg-main1
 # 함수 문서: [sinew](https://github.com/metrumresearchgroup/sinew) addin with [roxygen2](https://CRAN.R-project.org/package=roxygen2) 
 
+.large[
 .yellow[함수 읽은 후] 실행 
+]
+
 <br>
 <center><a href="https://github.com/metrumresearchgroup/sinew"><img src="sinew.gif" width=100%></a></center>
 
@@ -828,7 +844,9 @@ https://jinseob2kim.github.io/jskm/, https://jinseob2kim.github.io/jstable/, htt
 class:  bg-main1
 # [pkgdown](https://pkgdown.r-lib.org/)
 
+.large[
 패키지 설치 후 **_pkgdown.yml** 파일에서 셋팅. `usethis::use_pkgdown()`으로 기본 설정 생성.
+]
 
 ```yaml
 URL: https://jinseob2kim.github.io/jstable, https://github.com/jinseob2kim/jstable
@@ -856,8 +874,9 @@ template:
 class:  bg-main1
 # 홈페이지 만들기 
 
+.large[
 `build_site()` 실행하면 **/docs** 폴더에 홈페이지 만들어짐. 
-
+]
 
 ```{r, fig.cap="Setting webpage in github", out.width="60%"}
 include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-11e6-8086-ce1d246a87d2.png?fit=1460%2C860")
@@ -871,7 +890,9 @@ include_graphics("https://github.blog/wp-content/uploads/2016/08/d516076e-640c-1
 class:  bg-main1
 # Test code 넣기: [testthat](http://testthat.r-lib.org/)
 
+.large[
 함수의 테스트 코드를 작성하고 평가.
+]
 
 - `usethis::use_testthat(), use_test()`로 기본 테스트 생성. `devtools::test()`로 테스트.
 
@@ -887,11 +908,9 @@ test_that("Run cox2.display", {
   library(survival);data(lung)
   fit0 <- coxph(Surv(time, status) ~ ph.ecog + age, data = lung, model = TRUE)
   fit1 <- coxph(Surv(time, status) ~ ph.ecog + age + cluster(inst), data = lung, model = TRUE)
-  fit2 <- coxph(Surv(time, status) ~ ph.ecog + age + frailty(inst), data = lung, model = TRUE)
-  
+
   expect_is(cox2.display(fit0), "list")
   expect_is(cox2.display(fit1), "list")
-  expect_is(cox2.display(fit2), "list")      
 })
 ```
 
@@ -900,11 +919,14 @@ test_that("Run cox2.display", {
 class:  bg-main1
 # [covr](https://covr.r-lib.org/)
 
+.large[
 코드 테스트 리포트를 제공하는 [Codecov](https://codecov.io/)나 [Coveralls](https://coveralls.io/)를 위한 R 패키지.
 
 - `covr::codecov(), coverall()` 로 실행.
 
 - [testthat](http://testthat.r-lib.org/) 결과 기반 리포트. https://codecov.io/gh/jinseob2kim/jstable/tree/master/R
+]
+
 
 ```{r, out.width="75%"}
 include_graphics("codecov.png")
@@ -1023,7 +1045,9 @@ matrix:
 class:  bg-main1
 # [travis-ci](https://travis-ci.org/) with R package
 
+.large[
 - `usethis::use_travis()` 로 **.travis.yml** 기본 설정파일 생성.
+]
 
 ```yaml
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
@@ -1035,10 +1059,11 @@ cache: packages
 
 ---
 class:  bg-main1
+
 # Codecov
-
+.large[
 `usethis::use_coverage("codecov")` 로 **.travis.yml** 에 `covr::codecov()` 실행 추가.
-
+]
 
 ```yaml
 language: R
@@ -1055,7 +1080,9 @@ after_success:
 class:  bg-main1
 # 홈페이지 빌드, 배포
 
+.large[
 [travis-ci](https://travis-ci.org/) 가 직접 github에 배포하기 위해 .yellow[gh-pages 브랜치와 key]가 필요.
+]
 
 ```{r, out.width="75%"}
 include_graphics("gh-pages.png")
@@ -1091,20 +1118,21 @@ https://pkgdown.r-lib.org/reference/deploy_site_github.html
 class:  bg-main1
 # [appveyor](https://travis-ci.org/)
 
+.large[
 [travis-ci](https://travis-ci.org/)는 리눅스와 맥만 지원 
 
 - **윈도우** 환경에서 테스트 못함. 
-
+]
 
 --
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jinseob2kim/jstable?branch=master&svg=true)](https://ci.appveyor.com/project/jinseob2kim/jstable) 
 
-
+.large[
 [appveyor](https://travis-ci.org/)는 리눅스와 **윈도우** 지원
 
 - `usethis::use_appveyor()` 로 기본 **appveyor.yml** 파일 생성.
-
+]
 
 ---
 class:  bg-main1
@@ -1266,10 +1294,11 @@ class: bg-main1
 
 ### `usethis::use_vignette("jsmodule")` 로 기본 파일 생성.
 
+.large[
 - 귀찮으면 .yellow[README] 복붙하자. 
 
 - 홈페이지에도 추가됨.
-
+]
 
 
 ---
@@ -1324,6 +1353,7 @@ class:  bg-main1
 
 ### `devtools::release()` 실행
 
+.large[
 - 확인 질문들이 나옴: 문제 없다고 답하면 됨.
 
 - 확인 메일 보고 몇 가지 클릭하면 완료.
@@ -1331,7 +1361,7 @@ class:  bg-main1
 - **CRAN-RELEASE** 파일 생성됨: release 때 필요한 정보.
 
 - 진행과정 메일이 온다. 결정까지 10일 이내
-
+.large[
 
 
 ---
@@ -1344,9 +1374,9 @@ Once it is accepted, delete this file and tag the release (commit ec7a36c1d8).
 ```
 
 --
-
+.large[
 .yellow[CRAN] 배포 확정되면 해당 commit 번호로 release
-
+]
 <center><a href="https://github.com/jinseob2kim/jstable/releases"><img src="release.png" width=60%></a></center>
 
 
@@ -1379,6 +1409,7 @@ please cancel my submit. I will follow CRAN policies.
 class: bg-main1
 # Executive Summary 
 
+.large[
 - 의학연구자들에게 맞춤형 **[ShinyApps](https://shiny.rstudio.com/)**를 제공하고, 범용으로 쓰일만한 것들을 **[Shiny module](https://shiny.rstudio.com/articles/modules.html)**로 만든 후, **[웹](http://app.zarathu.com)**을 통해 배포하였다. 
 
 
@@ -1392,7 +1423,7 @@ class: bg-main1
 
 
 - 최종적으로 **[CRAN](https://cran.r-project.org/)**에 패키지를 배포하고, .yellow[V1.0.1] 까지 업데이트 하였다.
-
+]
 
 ---
 class: bg-main1 middle
