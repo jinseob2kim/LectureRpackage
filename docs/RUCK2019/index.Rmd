@@ -1361,7 +1361,7 @@ class:  bg-main1
 - **CRAN-RELEASE** 파일 생성됨: release 때 필요한 정보.
 
 - 진행과정 메일이 온다. 결정까지 10일 이내
-.large[
+]
 
 
 ---
