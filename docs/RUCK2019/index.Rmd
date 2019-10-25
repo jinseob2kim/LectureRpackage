@@ -3,7 +3,7 @@ title: "From ShinyApps to CRAN"
 subtitle: "RUCK 2019"
 institute: Zarathu Co., Ltd
 author: "<br><br>Jinseob Kim; [`r anicon::faa('github', animate='float', rtext='jinseob2kim')`](https://github.com/jinseob2kim)"
-date: "<br><br>2018-10-25"
+date: "<br><br>2019-10-25"
 output:
   xaringan::moon_reader:
      lib_dir: libs
