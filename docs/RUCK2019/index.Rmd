@@ -100,7 +100,7 @@ class:  bg-main1
 
 ### 기술통계, 회귀/생존분석, 맞춤형 그림
 
-<a href="http://147.47.68.165:1111/LeeKW/KTsym/"><img src="ktsym.jpg" width=100%></a>
+<img src="ktsym.jpg" width=100%>
 
 
 ---
@@ -418,7 +418,7 @@ class: bg-main1
 
 ### [MatchIt](https://CRAN.R-project.org/package=MatchIt) 패키지 적용, .yellow[matching & IPTW]
 
-<center><a href="http://147.47.68.165:1111/COBIS_gacheon/"><img src="ps.jpg" width=80%></a></center>
+<center><img src="ps.jpg" width=80%></center>
 
 
 ---
@@ -427,7 +427,7 @@ class: bg-main1
 
 ### [zip](https://cran.r-project.org/package=zip) 패키지 이용, 결과 들어있는 .yellow[zip] 업로드하여 확인.
 
-<center><a href="http://147.47.68.165:1111/cdm/estimation"><img src="cdm.jpg" width=80%></a></center>
+<center><img src="cdm.jpg" width=80%></center>
 
 ---
 class: bg-main1
