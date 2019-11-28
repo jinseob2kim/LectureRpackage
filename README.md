@@ -11,3 +11,4 @@ Lecture about R package
 
 * [RUCK2019](http://ruck2019.r-kor.org/) 발표 준비: https://jinseob2kim.github.io/LectureRpackage/RUCK2019
 
+* [RSelenium](https://github.com/ropensci/RSelenium) 이용 팁: https://jinseob2kim.github.io/LectureRpackage/RSelenium
