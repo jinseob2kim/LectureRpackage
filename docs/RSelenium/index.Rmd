@@ -154,6 +154,124 @@ Windows: **디렉토리 구분은 '/'**
 docker run -p 4445:4444 --shm-size="1g"  -v c:/Downloads:/home/seluser selenium/standalone-chrome
 ```
 
+---
+# [RSelenium](https://github.com/ropensci/RSelenium)
+
+`remoteDriver` 함수로 Selenium 연결.
+
+```r
+library(RSelenium)
+
+remDr <- remoteDriver(
+  remoteServerAddr = "localhost",
+  port = 4445L,
+  browserName = "chrome"
+)
+```
+
+[다른 docker image](https://github.com/SeleniumHQ/docker-selenium) 이용하면 firefox, IE 도 가능
+
+
+
+---
+# 웹 접속 
+
+```r
+remDr$open()
+remDr$navigate("http://biaqsm.airguardk.com/login_payment.html")
+```
+
+- 실행해도 브라우저가 안열린다? 
+
+- Docker 내부에서 잘 실행되고 있고, 스크린샷과 url 주소 확인 가능.
+
+```r
+remDr$screenshot(display = T)
+remDr$getCurrentUrl()
+remDr$getTitle()
+remDr$refresh()
+```
+
+
+---
+# Element 찾기
+
+.large[
+원하는 항목에 마우스 우클릭 후 **Inspect** 클릭
+]
+
+<center>
+<img src="click.png" width=100%>
+</center>
+
+
+---
+# Element 찾기(2)
+
+.large[
+파란 줄에 마우스 우클릭 후 **Copy XPath** 클릭
+]
+
+<center>
+<img src="xpath.png" width=100%>
+</center>
+
+
+---
+# Element 다루기
+
+`findElement` 에 **복사한 XPath 를 입력**.
+
+```r
+## 기업회원
+co_btn <- remDr$findElement(using="xpath",value='//*[@id="corporation_btn"]/a')
+
+## ID, password
+txt_email <- remDr$findElement(using="xpath",value='//*[@id="id"]')
+txt_password <- remDr$findElement(using="xpath",value='//*[@id="pwd"]')
+
+## Login button
+login_btn <- remDr$findElement(using="xpath",value='//*[@id="login"]')
+```
+
+`clickElement()`: 클릭 
+
+`sendKeysToElement`: 값 입력
+
+```r
+co_btn$clickElement()
+txt_email$sendKeysToElement(list("MYEMAIL"))
+txt_password$sendKeysToElement(list("MYPASSWORD"))
+login_btn$clickElement()
+```
+
+
+
+
+
+---
+
+class: center, middle
+
+# 목표 실행
+
+
+
+---
+# 더 알아볼 내용: 캘린더 형태
+
+**날짜 바로 입력 안됨**
+
+- **이전달, 다음달** 클릭
+
+- 11월 6일은 캘린더의 **3행 5열**
+
+**XPath**:  '//*[@id="ui-datepicker-div"]/table/tbody/tr[3]/td[5]/a'
+
+
+<center>
+<img src="calender.png" width=100%>
+</center>
 
 
 
