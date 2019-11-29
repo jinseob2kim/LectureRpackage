@@ -37,7 +37,9 @@ layout: true
 
 # Executive Summary 
 
+.large[
 웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
+]
 
 --
 .large[
@@ -65,32 +67,100 @@ layout: true
 .large[
 - 50개 일별 데이터 다운로드에 성공하였다.  
 ]
----
-
-# ShinyApps
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://camo.githubusercontent.com/aa4156b420be17d5ee0c39271486d13db4886712/68747470733a2f2f636f6d6d756e6974792e7273747564696f2e636f6d2f75706c6f6164732f64656661756c742f6f7074696d697a65642f32582f652f653134333064663830376335313335656437613234666565396639626238633339303330373831315f315f363930783336302e676966" alt="Basic statistics" width="100%" /&gt;
-&lt;p class="caption"&gt;Basic statistics&lt;/p&gt;
-&lt;/div&gt;
-
 
 ---
-# Rstudio Addins
+# 목표: 로그인
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://camo.githubusercontent.com/96f270fef715ed29c4799a165e6de679def95c92/68747470733a2f2f626c6f672e616e70616e6d616e2e636f2e6b722f706f7374732f323031382d31312d32342d62617369632d62696f737461746973746963732f616464696e2e676966" alt="Rstudio Addins: jsmodule packages" width="100%" /&gt;
-&lt;p class="caption"&gt;Rstudio Addins: jsmodule packages&lt;/p&gt;
-&lt;/div&gt;
+.large[로그인]
+
+&lt;center&gt;
+&lt;a href="http://biaqsm.airguardk.com/login_payment.html"&gt;&lt;img src="biaq.png" width=80%&gt;&lt;/a&gt;
+&lt;/center&gt;
+
+
+---
+# 목표: 테이블 클릭 
+
+.large[스테이션 세부 기록 접근]
+
+&lt;center&gt;
+&lt;img src="station.png" width=100%&gt;
+&lt;/center&gt;
+
+
+---
+# 목표: 윈도우 변경
+
+.large[각 스테이션 정보는 새 팝업창에서 확인]
+
+&lt;center&gt;
+&lt;img src="popup.png" width=100%&gt;
+&lt;/center&gt;
+
+
+---
+# 목표: 데이터 다운로드
+
+.large[날짜 설정, 다운로드 버튼 클릭]
+
+&lt;center&gt;
+&lt;img src="download.png" width=100%&gt;
+&lt;/center&gt;
+
+---
+# 목표: 50 스테이션 한번에 
+
+.large[
+50 스테이션 일별 데이터를 한번에 다운로드
+]
+
+&lt;center&gt;
+&lt;img src="d50.png" width=100%&gt;
+&lt;/center&gt;
+
+
+---
+
+class: center, middle
+
+# Selenium
+
+
+---
+# [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/)
+
+.large[
+도커 이용, 복잡한 설치과정 없이 바로 [Selenium](https://selenium.dev/) 실행.
+
+- 다운로드 폴더 지정: **`-v 내디렉토리:/home/seluser`**
+
+- 메모리 옵션 설정 **`--shm-size="1g"`** 
+
+    + 특정 사이트 접근 안될 때
+
+
+```sh
+docker run -p 4445:4444 --shm-size="1g"  -v /home/jinseob2kim/Dropbox/R/RSelenium:/home/seluser selenium/standalone-chrome
+```
+
+]
+
+
+Windows: **디렉토리 구분은 '/'**
+
+```sh
+docker run -p 4445:4444 --shm-size="1g"  -v c:/Downloads:/home/seluser selenium/standalone-chrome
+```
+
 
 
 ---
 
 # Executive Summary 
 
+.large[
 웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
 
-.large[
 - [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/) 를 이용, 복잡한 설치과정 없이 Selenium 을 실행하고 다운로드 경로를 설정하였다.
 
 
