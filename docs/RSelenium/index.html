@@ -123,7 +123,7 @@ layout: true
 
 class: center, middle
 
-# Selenium
+# Selenium 실행하기
 
 
 ---
@@ -155,6 +155,7 @@ docker run -p 4445:4444 --shm-size="1g"  -v c:/Downloads:/home/seluser selenium/
 ---
 # [RSelenium](https://github.com/ropensci/RSelenium)
 
+.large[
 `remoteDriver` 함수로 Selenium 연결.
 
 ```r
@@ -168,7 +169,7 @@ remDr &lt;- remoteDriver(
 ```
 
 [다른 docker image](https://github.com/SeleniumHQ/docker-selenium) 이용하면 firefox, IE 도 가능
-
+]
 
 
 ---
@@ -190,6 +191,17 @@ remDr$getTitle()
 remDr$refresh()
 ```
 
+종료 
+
+```r
+remDr$close()
+```
+
+---
+
+class: center, middle
+
+# Selenium으로 작업하기
 
 ---
 # Element 찾기
@@ -243,15 +255,156 @@ txt_password$sendKeysToElement(list("MYPASSWORD"))
 login_btn$clickElement()
 ```
 
+---
+# Element in Table
+
+XPath 에 **행렬정보** 표시, 전부 조사할 필요 없음.
+
+&lt;center&gt;
+&lt;img src="table.png" width=100%&gt;
+&lt;/center&gt;
+
+**XPath**: '/html/body/div/table/tbody/tr[2]/td[1]/span'
 
 
+---
+# `clickElement()` 안될 때
+
+.large[
+- 테이블의 "스테이션명" 을 클릭하면 새 팝업창이 떠야 함
+
+
+- 그러나 `clickElement()` 실행해도 아무 변화 없음.
+
+
+- 마우스 커서 옮겨 클릭: `mouseMoveToLocation`, `click`
+]
+
+
+```r
+st_2_btn &lt;- remDr$findElement(using="xpath",value= paste0('/html/body/div/table/tbody/tr[', snum + 1, ']/td[1]/span'))
+
+## Mouse button location
+remDr$mouseMoveToLocation(webElement = st_2_btn)
+
+## Mouse click
+remDr$click(buttonId = 'LEFT')
+```
+
+---
+# 새 팝업창 다루기
+
+전체 팝업창 목록: `getWindowHandles()`
+
+```r
+&gt; remDr$getWindowHandles()
+[[1]]
+[1] "CDwindow-F025DEFF3349C7361962B0402AA09F98"
+
+[[2]]
+[1] "CDwindow-CB609E654550958A16E2824AD3E435AE"
+```
+
+현재 팝업창 확인: `getCurrentWindowHandle()`
+
+```r
+&gt; remDr$getCurrentWindowHandle()
+[[1]]
+[1] "CDwindow-F025DEFF3349C7361962B0402AA09F98"
+```
+
+팝업창 바꾸기: `switchToWindow()`
+
+```r
+&gt; remDr$switchToWindow("CDwindow-CB609E654550958A16E2824AD3E435AE")
+&gt; remDr$getCurrentWindowHandle()
+[[1]]
+[1] "CDwindow-F025DEFF3349C7361962B0402AA09F98"
+```
+
+
+---
+# 팝업창 안바뀔 때 
+
+.large[
+자체 함수 만들기: https://github.com/ropensci/RSelenium/issues/143 
+]
+
+
+```r
+myswitch &lt;- function (remDr, windowId){
+  qpath &lt;- sprintf("%s/session/%s/window", remDr$serverURL, remDr$sessionInfo[["id"]])
+  remDr$queryRD(qpath, "POST", qdata = list(handle = windowId))
+}
+```
+.large[
+팝업창 바뀌는 것 확인 
+]
+
+```r
+&gt; myswitch(remDr, "CDwindow-CB609E654550958A16E2824AD3E435AE")
+&gt; remDr$getCurrentWindowHandle()
+[[1]]
+[1] "CDwindow-CB609E654550958A16E2824AD3E435AE"
+```
+
+
+---
+# 50개 Station 일별 데이터 다운
+
+.large[
+아래 작업을 함수로 만듦.
+
+- 스테이션 이름 클릭하여 해당 스테이션에 대한 **새 팝업창** 띄우기
+
+
+- 새 팝업창으로 이동 
+
+
+- 다운받을 **년, 월, 일** 설정 
+
+
+- **데이터 파일 다운로드** 버튼 클릭 
+
+
+- 팝업창 끄고(`closeWindow()`) 이전 팝업창으로 돌아가기
+
+
+]
 
 
 ---
 
-class: center, middle
 
-# 목표 실행
+```r
+## `snum`: 몇번째 스테이지? (1-50)
+DownStage &lt;- function(snum, yr, month, day){
+  st_2_btn &lt;- remDr$findElement(using="xpath",value= paste0('/html/body/div/table/tbody/tr[', snum + 1, ']/td[1]/span'))
+  remDr$mouseMoveToLocation(webElement = st_2_btn)
+  remDr$click(buttonId = 'LEFT')
+  myswitch(remDr, remDr$getWindowHandles()[[2]])
+* Sys.sleep(2)
+  remDr$findElement(using="xpath",value='//*[@id="timed_year"]')$sendKeysToElement(list(paste0(yr, "년")))
+  remDr$findElement(using="xpath",value='//*[@id="timed_month"]')$sendKeysToElement(list(paste0(month, "월")))
+  remDr$findElement(using="xpath",value='//*[@id="timed_day"]')$sendKeysToElement(list(paste0(day, "일")))
+  remDr$findElement(using="xpath",value='//*[@id="table-example"]/thead/tr[3]/td/form/a')$clickElement()
+  remDr$findElement(using="xpath",value='//*[@id="theme-wrapper"]/div/div/div/div/div[4]/input[4]')$clickElement()
+  
+  remDr$closeWindow()
+  myswitch(remDr, remDr$getWindowHandles()[[1]])
+* Sys.sleep(2)
+  cat(paste0(snum, "th data download\n"))
+}
+```
+
+팝업창 바꿀 때마다 여유시간 필요: `Sys.sleep(2)` 는 2초 쉬기 
+
+```r
+## Download 50 stage: 2019-11-02
+for (i in 1:50){
+  DownStage(i, 2019, 11, 02)
+}
+```
 
 
 
