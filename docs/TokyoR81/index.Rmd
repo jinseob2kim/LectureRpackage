@@ -64,15 +64,70 @@ layout: true
 ]
 
 
+---
+
+class: center, middle
+
+# 초심자세션
+
 
 ---
-# 목표: 로그인
+# R 기초
 
-.large[로그인]
 
-<center>
-<a href="http://biaqsm.airguardk.com/login_payment.html"><img src="biaq.png" width=80%></a>
-</center>
+---
+# Shiny 기초
+
+
+
+
+---
+
+class: center, middle
+
+# 응용세션 1
+
+---
+# 비동기 프로그래밍
+
+---
+# 30분만에 shiny 앱 만들기
+
+
+
+---
+
+class: center, middle
+
+# 응용세션 2
+
+
+---
+# [leaflet](https://rstudio.github.io/leaflet/) 지도앱 만들기
+
+
+---
+# shiny앱을 지탱하는 패키지
+
+
+
+---
+
+class: center, middle
+
+# LT
+
+---
+# 사진편집앱
+
+
+---
+# 사내용 범용 통계 앱
+
+
+---
+# [shiymeta](https://github.com/rstudio/shinymeta): Reproducible R code
+
 
 
 ---
