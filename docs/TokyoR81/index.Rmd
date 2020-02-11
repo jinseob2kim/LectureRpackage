@@ -1,0 +1,109 @@
+---
+title: "TokyoR 81회 리뷰"
+subtitle: "[Shinykorea 밋업](https://github.com/shinykorea)"
+author: "[김진섭](https://github.com/jinseob2kim)"
+date: "2020-03-16"
+output:
+  xaringan::moon_reader:
+    css: ["css/footer-header.css", "default"]
+    lib_dir: libs
+    nature:
+      beforeInit: "js/macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "4:3" 
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
+library(knitr);library(DT)
+```
+
+
+layout: true
+
+<div class="my-footer"><span><a href="https://www.zarathu.com">Zarathu Co.,Ltd</a>   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://github.com/jinseob2kim">김진섭</a></span></div> 
+
+
+---
+
+# Executive Summary 
+
+.large[
+웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
+]
+
+--
+.large[
+- [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/) 를 이용, 복잡한 설치과정 없이 Selenium 을 실행하고 다운로드 경로를 설정하였다.
+]
+--
+
+.large[
+- `findElement` 와 `sendKeysToElement`, `clickElement` 를 이용, 아이디와 비번을 입력하고 로그인버튼을 클릭하였다.
+]
+--
+
+.large[
+- `clickElement` 이 안될 때 `mouseMoveToLocation` 과 `click` 을 이용, 마우스로 클릭하였다.
+]
+--
+
+.large[
+- 작업 팝업창을 바꾸는 `switchToWindow` 가 안될 때, `queryRD` 로 자체 함수를 만들어 작업하였다. 
+]
+
+
+--
+
+.large[
+- 50개 일별 데이터 다운로드에 성공하였다.  
+]
+
+---
+# 목표: 로그인
+
+.large[로그인]
+
+<center>
+<a href="http://biaqsm.airguardk.com/login_payment.html"><img src="biaq.png" width=80%></a>
+</center>
+
+
+---
+
+# Executive Summary 
+
+.large[
+웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
+
+- [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/) 를 이용, 복잡한 설치과정 없이 Selenium 을 실행하고 다운로드 경로를 설정하였다.
+
+
+- `findElement` 와 `sendKeysToElement`, `clickElement` 를 이용, 아이디와 비번을 입력하고 로그인버튼을 클릭하였다.
+
+
+- `clickElement` 이 안될 때 `mouseMoveToLocation` 과 `click` 을 이용, 마우스로 클릭하였다.
+
+
+- 작업 팝업창을 바꾸는 `switchToWindow` 가 안될 때, `queryRD` 로 자체 함수를 만들어 작업하였다. 
+
+
+- 50개 일별 데이터 다운로드에 성공하였다.  
+]
+
+---
+
+class: center, middle
+
+# END
