@@ -40,7 +40,7 @@ layout: true
 # Executive Summary 
 
 .large[
-일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)를 리뷰하였다.
+일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)을 리뷰하였다.
 ]
 
 --
@@ -80,7 +80,7 @@ layout: true
 # Executive Summary 
 
 .large[
-일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)를 리뷰하였다.
+일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)을 리뷰하였다.
 
 - 초심자세션: [R](https://speakerdeck.com/kilometer/tokyo-dot-r-number-81-introduction-and-demonstration)과 [shiny 기초](https://speakerdeck.com/kyyonko/di-81hui-tokyor-chu-xin-zhe-setusiyon2-hazimetefalseshiny-80e4f56b-198d-4d7d-a4e0-df1097aa226d)를 다루었다.
 
