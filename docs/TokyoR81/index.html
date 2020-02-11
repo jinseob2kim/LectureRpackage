@@ -36,35 +36,30 @@ layout: true
 # Executive Summary 
 
 .large[
-웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
+일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)를 리뷰하였다.
 ]
 
 --
 .large[
-- [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/) 를 이용, 복잡한 설치과정 없이 Selenium 을 실행하고 다운로드 경로를 설정하였다.
+- 초심자세션: [R](https://speakerdeck.com/kilometer/tokyo-dot-r-number-81-introduction-and-demonstration)과 [shiny 기초](https://speakerdeck.com/kyyonko/di-81hui-tokyor-chu-xin-zhe-setusiyon2-hazimetefalseshiny-80e4f56b-198d-4d7d-a4e0-df1097aa226d)를 다루었다.
 ]
 --
 
 .large[
-- `findElement` 와 `sendKeysToElement`, `clickElement` 를 이용, 아이디와 비번을 입력하고 로그인버튼을 클릭하였다.
+- 응용세션1: [비동기 프로그래밍](https://www.slideshare.net/hoxo_m/shiny-177170789), [30분만에 적당히 사용할 shiny 앱 만들기](https://randpy-testserver.shinyapps.io/Slide/) 를 다루었다. 
 ]
 --
 
 .large[
-- `clickElement` 이 안될 때 `mouseMoveToLocation` 과 `click` 을 이용, 마우스로 클릭하였다.
+- 응용세션2: [leaflet 이용 지도앱 만들기](https://www.slideshare.net/kashitan/shinyleaflettips-177070514), [shiny앱을 지탱하는 엔지니어링 패키지](https://speakerdeck.com/okiyuki99/190928-tokyor81-shiny) 를 다루었다. 
 ]
 --
 
 .large[
-- 작업 팝업창을 바꾸는 `switchToWindow` 가 안될 때, `queryRD` 로 자체 함수를 만들어 작업하였다. 
+- LT: [Shiny로 만드는 사진편집앱](https://igjit.github.io/slides/2019/09/shinyroom/), [Shiny로 사내용 범용 통계 앱 만들기](https://slack-files.com/T06PCFXL2-FNULHJB2R-fe31d13827), 오픈소스 약물동태 시뮬레이션, [shiymeta로 재현가능한 R code 생성하기](https://docs.google.com/presentation/d/1aHRVEE05L7HO90TsTTFNsJZsVH-oI2umYlNR3NuXbac/edit) 등을 다루었다. 
 ]
 
 
---
-
-.large[
-- 50개 일별 데이터 다운로드에 성공하였다.  
-]
 
 ---
 # 목표: 로그인
@@ -81,21 +76,16 @@ layout: true
 # Executive Summary 
 
 .large[
-웹에 로그인 후 클릭기반 데이터 다운받는 과정을 [RSelenium](https://github.com/ropensci/RSelenium) 으로 자동화 하였다.
+일본 R 밋업 중 하나인 [TokyoR](https://tokyor.connpass.com/) 중 [81회 shiny 특집](https://tokyor.connpass.com/event/141318/)를 리뷰하였다.
 
-- [Selenium docker image](https://hub.docker.com/r/selenium/standalone-chrome/) 를 이용, 복잡한 설치과정 없이 Selenium 을 실행하고 다운로드 경로를 설정하였다.
-
-
-- `findElement` 와 `sendKeysToElement`, `clickElement` 를 이용, 아이디와 비번을 입력하고 로그인버튼을 클릭하였다.
+- 초심자세션: [R](https://speakerdeck.com/kilometer/tokyo-dot-r-number-81-introduction-and-demonstration)과 [shiny 기초](https://speakerdeck.com/kyyonko/di-81hui-tokyor-chu-xin-zhe-setusiyon2-hazimetefalseshiny-80e4f56b-198d-4d7d-a4e0-df1097aa226d)를 다루었다.
 
 
-- `clickElement` 이 안될 때 `mouseMoveToLocation` 과 `click` 을 이용, 마우스로 클릭하였다.
+- 응용세션1: [비동기 프로그래밍](https://www.slideshare.net/hoxo_m/shiny-177170789), [30분만에 적당히 사용할 shiny 앱 만들기](https://randpy-testserver.shinyapps.io/Slide/) 를 다루었다. 
 
+- 응용세션2: [leaflet 이용 지도앱 만들기](https://www.slideshare.net/kashitan/shinyleaflettips-177070514), [shiny앱을 지탱하는 엔지니어링 패키지](https://speakerdeck.com/okiyuki99/190928-tokyor81-shiny) 를 다루었다. 
 
-- 작업 팝업창을 바꾸는 `switchToWindow` 가 안될 때, `queryRD` 로 자체 함수를 만들어 작업하였다. 
-
-
-- 50개 일별 데이터 다운로드에 성공하였다.  
+- LT: [Shiny로 만드는 사진편집앱](https://igjit.github.io/slides/2019/09/shinyroom/), [Shiny로 사내용 범용 통계 앱 만들기](https://slack-files.com/T06PCFXL2-FNULHJB2R-fe31d13827), 오픈소스 약물동태 시뮬레이션, [shiymeta로 재현가능한 R code 생성하기](https://docs.google.com/presentation/d/1aHRVEE05L7HO90TsTTFNsJZsVH-oI2umYlNR3NuXbac/edit) 등을 다루었다. 
 ]
 
 ---
