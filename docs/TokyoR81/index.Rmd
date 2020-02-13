@@ -343,15 +343,159 @@ class: center, middle
 ---
 # 사진편집앱
 
+https://igjit.github.io/slides/2019/09/shinyroom/
+
+.large[
+- Twitter @igit, 웹앱 엔지니어, R로 이상한 것 만들기가 취미
+
+- [imager](https://github.com/dahtah/imager): 이미지 처리
+
+- [golem](https://github.com/ThinkR-open/golem): Shniy앱 R패키지로 만들게 도와줌.
+
+- [shinythemes](http://rstudio.github.io/shinythemes/): 테마
+
+]
+
+
+---
+# [shinyroom](https://github.com/igjit/shinyroom)
+
+https://shinyroom.herokuapp.com/
+
+<center>
+<iframe src="https://shinyroom.herokuapp.com/" width=100%, height = 500>
+</center>
+
+
+
 
 ---
 # 사내용 범용 통계 앱
+
+https://slack-files.com/T06PCFXL2-FNULHJB2R-fe31d13827
+
+- 이케다 타쿠로 37세, 리서치회사, R/shiny 1년, VBA 10년
+
+- Excel VBA 한계를 느껴 shiny 배움. 
+
+- 서버 운용 불가능할 때: 그냥 전부 zip 압축하여 전달
+
+- [원클릭으로 앱실행 원할 때](https://qiita.com/stkdev/items/954936991b1757008f50): `shiny::runapp()` R 스크립트를 vbs 배치파일로.
+
+- 일본어 처리: `iconv(from = "cp932", to = "utf8")`
+
+- 외부 **js, css** 이용: `tags$script(src="multiselect.js",type="text/javascript")`
+
+- Tableau/Alteryx 와 비교: shiny가 커스터마이징 좋은듯.
+
+
+---
+# 앱: 데이터 보기 
+
+<center>
+<img src="vba1.png" width=100%>
+</center>
+
+---
+# 앱: 데이터 시각화 
+
+<center>
+<img src="vba2.png" width=100%>
+</center>
+
+---
+# 앱: 클러스터링 
+
+<center>
+<img src="vba3.png" width=100%>
+</center>
+
+---
+# 앱: Kmeans
+
+<center>
+<img src="vba4.png" width=100%>
+</center>
+
+---
+# Zip 압축
+
+사내 shiny server 허락 안될 때: R, shiny 앱과 배치파일을 통째로 압축.
+
+<center>
+<img src="zip.png" width=80%>
+</center>
+
 
 
 ---
 # [shiymeta](https://github.com/rstudio/shinymeta): Reproducible R code
 
+[링크](https://docs.google.com/presentation/d/1aHRVEE05L7HO90TsTTFNsJZsVH-oI2umYlNR3NuXbac/edit#slide=id.g600e22e98e_0_0)
 
+.large[
+- 유키 히라, 데이터사이언티스트, 스포츠데이터 밋업 주관.
+
+- Shiny는 인터랙티브가 강점, 재현가능성은 Rmd보다 떨어짐.
+
+- [shiymeta](https://github.com/rstudio/shinymeta) 로 shiny 앱과 동일한 Rscript 생성.
+
+]
+
+
+---
+# useR! 2019
+
+<center>
+<iframe width="800" height="480" src="https://www.youtube.com/embed/5KByRC6eqC8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+
+---
+# Example app
+
+<center>
+<img src="meta1.png" width=100%>
+</center>
+
+
+---
+# Code
+
+<center>
+<img src="meta2.png" width=100%>
+</center>
+
+---
+# code 텍스트로 저장
+
+<center>
+<img src="meta3.png" width=100%>
+</center>
+
+
+
+---
+# `metaRender`
+
+<center>
+<img src="meta4.png" width=100%>
+</center>
+
+---
+# `..(input$var)`
+
+<center>
+<img src="meta5.png" width=100%>
+</center>
+
+
+---
+# `expandChain`
+
+<center>
+<img src="meta6.png" width=100%>
+</center>
 
 ---
 
